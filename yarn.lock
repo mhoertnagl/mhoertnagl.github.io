@@ -4030,6 +4030,15 @@ gray-matter@^4.0.2:
     section-matter "^1.0.0"
     strip-bom-string "^1.0.0"
 
+gridsome-plugin-remark-shiki@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/gridsome-plugin-remark-shiki/-/gridsome-plugin-remark-shiki-0.3.0.tgz#36e1a291b4a45ded418aade72ab75092906254b5"
+  integrity sha512-W4RHQQknqIX4jKGhADKPqxxpPOEAqHlWOYmmupCv9bwgtyowWdPzi7OmVqUbOQU9ikcvPMrF07U9VLo74f7MTA==
+  dependencies:
+    shiki "^0.1.2"
+    shiki-languages "^0.1.0"
+    unist-util-visit "^1.4.0"
+
 gridsome@^0.7.0:
   version "0.7.10"
   resolved "https://registry.yarnpkg.com/gridsome/-/gridsome-0.7.10.tgz#80536582232d1e6efc3ac61e6e838aede23a91aa"
@@ -5416,7 +5425,7 @@ lpad-align@^1.0.1:
     longest "^1.0.0"
     meow "^3.3.0"
 
-lru-cache@^4.0.1, lru-cache@^4.1.2:
+lru-cache@^4.0.1, lru-cache@^4.1.1, lru-cache@^4.1.2:
   version "4.1.5"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-4.1.5.tgz#8bbe50ea85bed59bc9e33dcab8235ee9bcf443cd"
   integrity sha512-sWZlbEP2OsHNkXrMl5GYk/jKk70MBng6UU4YI/qGDYbgf6YbP4EvmqISbXCoJiRKs+1bSpFHVgQxvJ17F2li5g==
@@ -6191,6 +6200,13 @@ onetime@^2.0.0:
   integrity sha1-BnQoIw/WdEOyeUsiu6UotoZ5YtQ=
   dependencies:
     mimic-fn "^1.0.0"
+
+onigasm@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/onigasm/-/onigasm-2.2.2.tgz#0f853152278bf0da5b3d5be728d5218e472d03ca"
+  integrity sha512-TQTMk+RmPYx4sGzNAgV0q7At7PABDNHVqZBlC4aRXHg8hpCdemLOF0qq0gUCjwUbc7mhJMBOo3XpTRYwyr45Gw==
+  dependencies:
+    lru-cache "^4.1.1"
 
 optimist@^0.6.1:
   version "0.6.1"
@@ -7846,6 +7862,31 @@ shebang-regex@^1.0.0:
   resolved "https://registry.yarnpkg.com/shebang-regex/-/shebang-regex-1.0.0.tgz#da42f49740c0b42db2ca9728571cb190c98efea3"
   integrity sha1-2kL0l0DAtC2yypcoVxyxkMmO/qM=
 
+shiki-languages@^0.1.0, shiki-languages@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/shiki-languages/-/shiki-languages-0.1.6.tgz#4a71eba9d345de4780fc46994e4d073356573e3e"
+  integrity sha512-rMu+z97UCPKMtPBkzLBItReawXnlOgXZmELFwI/s3ATxd9VzJgSQTtQW/hmW5EYCrzF2kAUjoOnn+50/MPWjgQ==
+  dependencies:
+    vscode-textmate "https://github.com/octref/vscode-textmate"
+
+shiki-themes@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/shiki-themes/-/shiki-themes-0.1.5.tgz#522a0d0e450316abbc10914f543e6eb0cc515f33"
+  integrity sha512-gti5xOV8f2R3EL1ULcpqarOHCNgnGds2saWc7k40ZBOtQBrQQ8na+hKwXASWZu7rL9+/RCr2z+Lf+UR7C71kRA==
+  dependencies:
+    json5 "^2.1.0"
+    vscode-textmate "https://github.com/octref/vscode-textmate"
+
+shiki@^0.1.2:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/shiki/-/shiki-0.1.6.tgz#1db16acbb840cd275b196ff2829781b483aef54e"
+  integrity sha512-qG/T0bqNxcLM6nvoX0MZKjAzU14P6j5KutFhjCvnNHGfDmH1Z0VL/KQ/kMmtcGRlXfnlaMBXxniMnGGE7DhJRg==
+  dependencies:
+    onigasm "^2.2.1"
+    shiki-languages "^0.1.6"
+    shiki-themes "^0.1.5"
+    vscode-textmate "https://github.com/octref/vscode-textmate"
+
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/signal-exit/-/signal-exit-3.0.2.tgz#b5fdc08f1287ea1178628e415e25132b73646c6d"
@@ -9069,6 +9110,15 @@ vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
+
+"vscode-textmate@git+https://github.com/octref/vscode-textmate.git":
+  version "4.0.1"
+  resolved "git+https://github.com/octref/vscode-textmate.git#e65aabe2227febda7beaad31dd0fca1228c5ddf3"
+
+"vscode-textmate@https://github.com/octref/vscode-textmate":
+  version "4.0.1"
+  uid e65aabe2227febda7beaad31dd0fca1228c5ddf3
+  resolved "https://github.com/octref/vscode-textmate#e65aabe2227febda7beaad31dd0fca1228c5ddf3"
 
 vue-analytics@^5.16.1:
   version "5.17.2"

@@ -14,7 +14,8 @@
     "@gridsome/source-filesystem": "^0.6.0",
     "@gridsome/transformer-remark": "^0.3.0",
     "gh-pages": "^2.1.1",
-    "gridsome": "^0.7.0"
+    "gridsome": "^0.7.0",
+    "gridsome-plugin-remark-shiki": "^0.3.0"
   },
   "devDependencies": {
     "node-sass": "^4.12.0",

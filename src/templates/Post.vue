@@ -82,9 +82,10 @@ query Post ($id: ID!) {
 .post {
 
   &__header {
-    width: calc(100% + var(--space) * 2);
-    margin-left: calc(var(--space) * -1);
-    margin-top: calc(var(--space) * -1);
+    width: calc(100% + var(--space) * 2 + 2px);
+    margin-top: calc(var(--space) * -1 - 1px);
+    margin-left: calc(var(--space) * -1 - 1px);
+    margin-right: calc(var(--space) * -1 - 2px);
     margin-bottom: calc(var(--space) / 2);
     overflow: hidden;
     border-radius: var(--radius) var(--radius) 0 0;
@@ -109,8 +110,9 @@ query Post ($id: ID!) {
     }
 
     img {
-      width: calc(100% + var(--space) * 2);
-      margin-left: calc(var(--space) * -1);
+      width: calc(100% + var(--space) * 2 + 2px);
+      margin-left: calc(var(--space) * -1 - 1px);
+      margin-right: calc(var(--space) * -1 - 2px);
       display: block;
       max-width: none;
     }

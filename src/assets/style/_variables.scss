@@ -12,6 +12,9 @@ body {
  	--title-color: #111;
  	--link-color: #6b17e6;
  	--border-color: rgba(0,0,0,.1);
+  --border-top-color: rgba(0,0,0,.02);
+  --border-bottom-color: rgba(0,0,0,.01);
+  --box-shadow-color: rgba(0,0,0,.2);
   --space: 3.5rem;
   --content-width: 860px;
   --header-height: 80px;
@@ -34,8 +37,11 @@ body {
 body[data-theme="dark"] {
  	--bg-color: #0D2538;
  	--bg-content-color: #0f2d44;
- 	--bg-code: #0B2030; //rgba(0,0,0,.3);
+ 	--bg-code: #0B2030;
  	--border-color: rgba(255,255,255,.1);
+  --border-top-color: rgba(255,255,255,.02);
+  --border-bottom-color: rgba(255,255,255,.01);
+  --box-shadow-color: rgba(0,0,0,.2);
  	--body-color: #ced8de;
  	--title-color: #fff;
  	--link-color: #af9cef;

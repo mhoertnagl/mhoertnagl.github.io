@@ -15,15 +15,18 @@ p {
 }
 
 h1, h2, h3, h4, h5 {
-  color: var(--title-color);
   font-weight: 600;
   line-height: 1.15;
   margin: 2.75rem 0 1rem;
   transition: color .6s;
 }
 
+h1, h2, h3, h4, h5 {
+  color: var(--sub-title-color);
+}
 
 h1 {
+  color: var(--title-color);
   margin-top: 0;
   font-size: 1.802em;
 }
@@ -45,7 +48,7 @@ strong {
 blockquote {
   border-left: 4px solid var(--border-color);
   padding-left: calc(var(--space) / 2);
-  color: var(--title-color);
+  color: var(--sub-title-color);
 }
 
 em {

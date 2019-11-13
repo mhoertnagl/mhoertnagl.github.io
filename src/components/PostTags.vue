@@ -17,12 +17,11 @@ export default {
   margin: 1em 0 0;
 
   &__link {
-  	margin-right: .7em;
   	font-size: .8em;
-  	color: currentColor;
   	text-decoration: none;
-  	background-color: var(--bg-color);
-  	color: currentColor!important; //Todo: remove important;
+    color: var(--tag-color) !important;
+  	background-color: var(--bg-tag);
+    margin-right: .7em;
   	padding: .5em;
   	border-radius: var(--radius);
   }

@@ -11,6 +11,10 @@ pre {
   margin-bottom: 2em;
 }
 
+code {
+  color: var(--code-color);
+}
+
 :not(pre) > code {
   background-color: var(--bg-code) !important;
 	white-space: normal;

@@ -39,6 +39,7 @@ export default {
 	max-width: 500px;
 	text-align: center;
 	padding: calc(var(--space) / 2) 0;
+  position: fixed;
 
 	&__image {
 		border-radius: 100%;

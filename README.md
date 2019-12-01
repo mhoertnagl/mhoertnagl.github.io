@@ -3,6 +3,7 @@
 > A simple, hackable & minimalistic starter for Gridsome that uses Markdown for content.
 
 ## Features
+
 - Beautiful and simple design.
 - Markdown for content.
 - Tags support.
@@ -27,3 +28,13 @@ https://gridsome-starter-blog.netlify.com
 2. `cd my-gridsome-site` to open folder
 3. `gridsome develop` to start local dev server at `http://localhost:8080`
 4. Happy coding 🎉🙌
+
+Artikelideen
+
+- Best Books
+- Other Reviews
+- vue directive v-debounce
+- Splis2 VM
+- Polo
+- Let me prove that for you. Artikel über Beweise/Experimente damit man sich selbst von einer Wahrheit überzeugen kann.
+  - Treibhauseffekt-Experiment

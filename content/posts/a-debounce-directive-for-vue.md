@@ -1,12 +1,11 @@
 ---
 title: A Debounce Directive for Vue
 date: 2019-12-01
-published: false
-tags: ['Markdown', 'Cover Image']
+published: true
+tags: ['Vue', 'Typescript']
 series: false
-# cover_image: ./images/alexandr-podvalny-220262-unsplash.jpg
 canonical_url: false
-description: ""
+description: "Develop a reusable vue-directive to debounce AJAX requests."
 ---
 
 Abstractions are a vital ingredient to computer science. As a web developer I am scouting for even the tiniest of abstractions that reduce the repetitve chores. A problem I came across recently is debouncing AJAX requests. We will develop a reusable vue-directive ready to be attached to any input element.
@@ -14,17 +13,9 @@ Abstractions are a vital ingredient to computer science. As a web developer I am
 ## The Status Quo
 
 Let's take a look at an acutal example. The following code segments implement a debounced search box.
-The example is available as a [code sandbox](xxx).
 
 ```html
-<v-text-field
-  v-model="search"
-  dense
-  single-line
-  hide-details
-  append-icon="$vuetify.icons.search"
-  placeholder="Type anything ..."
-></v-text-field>
+<v-text-field v-model="search"></v-text-field>
 ```
 
 The component watches the model `search` for changes. If there is a pending request, we cancel it and initiate a new request with the updated search value. I'm using [Lodash's debounce function](https://lodash.com/docs/4.17.15#debounce) to handle the actual debouncing.
@@ -66,11 +57,6 @@ It's perfectly acceptable to wrap the logic in a vue `debounce` component but th
   v-model="search"
   @input="fetchItems"
   v-debounce:input="500"
-  dense
-  single-line
-  hide-details
-  append-icon="$vuetify.icons.search"
-  placeholder="Type anything ..."
 ></v-text-field>
 ```
 
@@ -88,19 +74,11 @@ export default class Items extends Vue {
 }
 ```
 
-Nice! Alot more delcarative. `@input="fetchItems"` invokes the AJAX fetching logic whenever the input box triggers an `input` event. We specify the actual debouncing behavior in this line
-
-```html
-<v-text-field
-  ...
-  v-debounce:input="500"
-  ...
-></v-text-field>
-```
-
-It reads: debounce all listeners attached to the `input` event with a wait period of `500ms`.
+Nice! Alot more delcarative. `@input="fetchItems"` invokes the AJAX fetching logic whenever the input box triggers an `input` event. We specify the actual debouncing behavior with `v-debounce:input="500"`. It reads: debounce all listeners attached to the `input` event with a wait period of `500` ms. The final piece is the directive itself.
 
 ## Implementing The Directive
+
+This code will register our new directive `debounce`. The method `bind` gets called exactly once when the directive is bound to the element for the first time. The argument `vnode` contains a reference to the actual vue instance and `binding` provides properties supplied to the directive. `binding.arg` holds the name of the event that will be debounced and `binding.value` specifies the waiting time in milliseconds.
 
 ```ts
 import Vue, { VNode } from 'vue'
@@ -135,7 +113,11 @@ Vue.directive('debounce', {
     }
   },
 })
+```
 
+The first thing to do is to disable the original listeners registered with the event. Vue's [$off](https://vuejs.org/v2/api/#vm-off) function comes in handy. Next we wrap all the disabled listeners and re-register the wrapped functions with the event.
+
+```ts
 function wrapListener(instance: Vue, listener: Function, binding: DirectiveBinding) {
   if (binding.arg === undefined) {
     throw new Error('missing argument to v-debounce.')
@@ -157,4 +139,20 @@ function wrapListener(instance: Vue, listener: Function, binding: DirectiveBindi
 }
 ```
 
-<!-- Abstractions are a vital ingredient to computer science. This is especially true in the realm of web development. Perhaps all of us are on the quest to implement or discover some Grand Unified Framework, that is designed to solve each and every technical challenge our customers may pose on us. While there is indeed a long road ahead of us and the odds are, there will never be a GUF ever, it is still rewarding to build many tiny abstractions. -->
+The wrapper function is doing the same thing as our conventional debouncing logic. It creates a property in the data section that will reference the current debounced function. If there is a pending debouncing function, we will cancel it and invoke a new debounced function.
+
+## Conclusion
+
+We are done. This code will save you a bit of boilerplate and reduces the noise in the component implementation. If you want to get your hands dirty try the exercise.
+
+## Exercises
+
+1. Implement a component that serves the same purpose as the `v-debounce` directive. An exemplar usage may look like this:
+
+   ```html
+   <debounce #default="{ on }" :call="fetchItems" :wait="500">
+     <v-text-field v-model="search" @input="on"></v-text-field>
+   </debounce>
+   ```
+
+   `on` wrapps the original call `fetchItems` and debounces it with a wait period of `500` ms.

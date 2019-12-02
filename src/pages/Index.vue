@@ -44,7 +44,13 @@ export default {
     PostCard
   },
   metaInfo: {
-    title: 'Waaaaas?'
+    title: 'Minutiae Of Growth And Regression'
   }
 }
 </script>
+
+// <style lang="scss">
+// .posts {
+//   margin-top: 330px;
+// }
+// </style>

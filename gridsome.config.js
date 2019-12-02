@@ -5,8 +5,8 @@
 // To restart press CTRL + C in terminal and run `gridsome develop`
 
 module.exports = {
-  siteName: 'Blog',
-  siteDescription: 'A simple, hackable & minimalistic starter for Gridsome that uses Markdown for content.',
+  siteName: 'Minutiae Of Growth And Regression',
+  siteDescription: 'A blog about things I deem interesting.',
 
   siteUrl: 'https://mhoertnagl.github.io',
   pathPrefix: '/mhoertnagl.github.io',

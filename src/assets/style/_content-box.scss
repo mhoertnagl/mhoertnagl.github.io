@@ -6,8 +6,8 @@
 	transition: background-color .6s;
 	padding: var(--space);
   border-top: 1px solid var(--border-top-color);
-  border-left: 1px solid var(--border-bottom-color);
-  border-right: 1px solid var(--border-bottom-color);
+  border-left: 1px solid var(--border-side-color);
+  border-right: 1px solid var(--border-side-color);
   border-bottom: 1px solid var(--border-bottom-color);
   border-radius: var(--radius);
   box-shadow: 0px 2px 5px 0 var(--box-shadow-color);

@@ -72,7 +72,7 @@ export default {
 }
 
 .git-hub svg {
-  fill: var(--link-color);
+  // fill: var(--link-color);
   width: 32px;
   height: 32px;
 }

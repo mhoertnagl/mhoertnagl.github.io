@@ -16,14 +16,16 @@ body {
   --bg-tag: #F28705;
 
  	--border-color: rgba(0,0,0,.1);
-  --border-top-color: rgba(255,255,255,.99);
+  --border-top-color: rgba(255,255,255,1);
+  --border-side-color: rgba(255,255,255,.99);
   --border-bottom-color: rgba(255,255,255,.98);
   --box-shadow-color: rgba(0,0,0,.2);
 
-  --body-color: #053F4D; // #021D24;
-  --title-color: #053F4D; // #021D24;
+  --body-color: #053F4D;
+  --title-color: #053F4D;
   --sub-title-color: #053F4D;
   --link-color: #08748C;
+  --link-hover-color: #053F4D;
   --code-color: #d8dee9;
   --tag-color: #fff;
 
@@ -39,16 +41,18 @@ body[data-theme="dark"] {
   --bg-tag: #0B2030;
 
  	--border-color: rgba(255,255,255,.1);
-  --border-top-color: rgba(255,255,255,.02);
+  --border-top-color: rgba(255,255,255,.03);
+  --border-side-color: rgba(255,255,255,.02);
   --border-bottom-color: rgba(255,255,255,.01);
   --box-shadow-color: rgba(0,0,0,.2);
 
  	--body-color: #ced8de;
- 	--title-color: #fff;
-  --sub-title-color: #fff;
+ 	--title-color: #F8F6F6;
+  --sub-title-color: #F8F6F6;
  	--link-color: #FFBE45;
+  --link-hover-color: #F8F6F6;
   --code-color: #d8dee9;
-  --tag-color: #fff;
+  --tag-color: #F8F6F6;
 
   --scrollbar-thumb-color: #ced8de;
   --scrollbar-bg-color: #0D2538;

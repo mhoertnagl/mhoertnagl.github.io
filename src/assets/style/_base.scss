@@ -40,6 +40,14 @@ a:not(.button) {
 	}
 }
 
+a svg {
+  fill: var(--link-color);
+  transition: fill .2s;
+  &:hover {
+    fill: var(--link-hover-color);
+  }
+}
+
 img {
 	max-width: 100%;
 }

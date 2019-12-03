@@ -5,6 +5,7 @@ published: true
 tags: ['Vue', 'Typescript']
 series: false
 canonical_url: false
+cover_image: ''
 description: "Develop a reusable vue-directive to debounce AJAX requests."
 ---
 

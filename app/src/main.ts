@@ -1,4 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import importComponents from './autoreg'
 
-createApp(App).mount('#app')
+const app = createApp(App)
+
+importComponents(app)
+
+app.mount('#app')

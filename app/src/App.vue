@@ -33,7 +33,7 @@ stateDiagram-v2
 </script>
 
 <template>
-  <article-renderer :source="source" />
+  <blog-article :source="source" />
 </template>
 
 <style>

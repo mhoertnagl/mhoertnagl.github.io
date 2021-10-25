@@ -4,47 +4,47 @@
   import marked, { MarkedExtension } from 'marked'
   import hljs from 'highlight.js'
   import 'highlight.js/styles/default.css'
-  import mermaid from 'mermaid'
-  import katex from 'katex'
-  import 'katex/dist/katex.css'
+  // import mermaid from 'mermaid'
+  // import katex from 'katex'
+  // import 'katex/dist/katex.css'
 
   const props = defineProps<{ source: string }>()
 
-  mermaid.initialize({})
+  // mermaid.initialize({})
 
   // https://marked.js.org/using_pro#extensions
 
-  const mermaidExtension: MarkedExtension = {
-    renderer: {
-      code(code, language) {
-        if (language === 'mermaid') {
-          return `<div class="mermaid">${code}</div>`
-        }
-        // Use default code renderer.
-        return false
-      },
-    },
-  }
+  // const mermaidExtension: MarkedExtension = {
+  //   renderer: {
+  //     code(code, language) {
+  //       if (language === 'mermaid') {
+  //         return `<div class="mermaid">${code}</div>`
+  //       }
+  //       // Use default code renderer.
+  //       return false
+  //     },
+  //   },
+  // }
 
-  const latexExtension: MarkedExtension = {
-    renderer: {
-      code(code, language) {
-        if (language === 'katex') {
-          return katex.renderToString(code, {
-            displayMode: true,
-          })
-        }
-        // Use default code renderer.
-        return false
-      },
-      codespan(code) {
-        if (code.startsWith('katex')) {
-          return katex.renderToString(code.substring(5))
-        }
-        return false
-      },
-    },
-  }
+  // const latexExtension: MarkedExtension = {
+  //   renderer: {
+  //     code(code, language) {
+  //       if (language === 'katex') {
+  //         return katex.renderToString(code, {
+  //           displayMode: true,
+  //         })
+  //       }
+  //       // Use default code renderer.
+  //       return false
+  //     },
+  //     codespan(code) {
+  //       if (code.startsWith('katex')) {
+  //         return katex.renderToString(code.substring(5))
+  //       }
+  //       return false
+  //     },
+  //   },
+  // }
 
   marked.setOptions({
     highlight: (code, lang) => {
@@ -54,8 +54,8 @@
     langPrefix: 'hljs language-',
   })
 
-  marked.use(mermaidExtension)
-  marked.use(latexExtension)
+  // marked.use(mermaidExtension)
+  // marked.use(latexExtension)
 
   const cleanSource = props.source.trim()
   const meta = matter.loadFront(cleanSource)

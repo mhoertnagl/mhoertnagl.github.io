@@ -1,7 +1,7 @@
 import { Command } from "commander";
 import { generate } from "./commands/generate";
 
-export function cli(args) {
+export function cli(args: string[]) {
   const program = new Command();
 
   program

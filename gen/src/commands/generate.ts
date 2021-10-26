@@ -1,5 +1,7 @@
 import fs from "fs-extra";
+import glob from "fast-glob";
 import { join, parse } from "path";
+import handlebars from "handlebars";
 
 // const spinner = ora({
 //   text: "Simulating some slow async task. What a Devimal Planet...",
@@ -8,28 +10,45 @@ import { join, parse } from "path";
 // spinner.succeed("Heavy task finished!\n");
 
 export async function generate() {
-  // Read and cache all layouts
-  // Read all pages
-  // Read index.handlebars
-  // Generate files
   const cwd = process.cwd();
   const srcDir = join(cwd, "src");
-
-  const layouts = await loadLayouts(srcDir);
-
   // const outDir = join(cwd, "docs");
+  const layouts = await loadLayouts(srcDir);
+  const layout = layouts.get("article");
+  if (layout) {
+    console.log(layout({ test: "hui" }));
+  }
+
+  const base = join(srcDir, "pages");
+  const files = await glob("**/*.md", {
+    cwd: base,
+    onlyFiles: true,
+  });
+
+  // Read page contents
+  // Compile (front-matter + markdown)
+
+  // Read index.handlebars
+
+  // Create HTML files
+
+  console.log(files);
+
   // await copyAssets(srcDir, outDir);
-  console.log("Test");
 }
 
 async function loadLayouts(srcDir: string) {
-  const layouts = new Map<string, string>();
-  const layoutsDir = join(srcDir, "layouts");
-  const layoutFiles = await fs.readdir(layoutsDir);
-  for (const layoutFile of layoutFiles) {
-    const layoutPath = join(layoutsDir, layoutFile);
-    const contents = await fs.readFile(layoutPath, "utf8");
-    layouts.set(parse(layoutFile).name, contents);
+  const layouts = new Map<string, HandlebarsTemplateDelegate>();
+  const base = join(srcDir, "layouts");
+  const files = await glob("**/*.handlebars", {
+    cwd: base,
+    onlyFiles: true,
+  });
+  for (const file of files) {
+    const path = join(base, file);
+    const contents = await fs.readFile(path, "utf8");
+    const template = handlebars.compile(contents);
+    layouts.set(parse(file).name, template);
   }
   return layouts;
 }

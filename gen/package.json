@@ -1,0 +1,23 @@
+{
+  "name": "hiro",
+  "version": "1.0.0",
+  "repository": "",
+  "description": "Hiro Static Site Generator",
+  "author": "Mathias Hörtnagl",
+  "license": "MIT",
+  "private": false,
+  "keywords": [
+    "static-site-generator"
+  ],
+  "main": "src/index.js",
+  "bin": {
+    "hiro": "bin/hiro"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "commander": "^8.2.0",
+    "esm": "^3.2.25"
+  }
+}

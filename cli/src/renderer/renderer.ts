@@ -8,6 +8,7 @@ import { katexExtension } from "./extensions/katex";
 
 class Renderer {
   constructor() {
+    // https://mermaid-js.github.io/mermaid/#/usage
     // mermaid.initialize({})
 
     // const mermaidExtension: MarkedExtension = {

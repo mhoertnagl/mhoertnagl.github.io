@@ -4,12 +4,19 @@
     {{! <link rel="icon" href="/favicon.ico" /> }}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog</title>
+    <link
+      href="//fonts.googleapis.com/css?family=Raleway:300,400,600"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/skeleton.css" />
   </head>
   <body>
-    <ul>
+    <main class="container">
       {{#pages}}
-        <li><a href="{{path}}">{{meta.title}}</a></li>
+        <h5><a href="{{path}}">{{meta.title}}</a></h5>
       {{/pages}}
-    </ul>
+    </main>
   </body>
 </html>

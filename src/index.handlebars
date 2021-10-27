@@ -6,8 +6,10 @@
     <title>Blog</title>
   </head>
   <body>
-    {{#articles}}
-      <a href="{{path}}">{{meta.title}}</a>
-    {{/articles}}
+    <ul>
+      {{#pages}}
+        <li><a href="{{path}}">{{meta.title}}</a></li>
+      {{/pages}}
+    </ul>
   </body>
 </html>

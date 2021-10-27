@@ -3,92 +3,91 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
+import { PageInfo } from "../renderer/page";
 
 export async function generate() {
   const cwd = process.cwd();
   const srcDir = join(cwd, "src");
   const outDir = join(cwd, "docs");
-
   await fs.ensureDir(outDir);
-
-  const layouts = await loadLayouts(srcDir);
-  const articles = await createPages(srcDir, outDir, layouts);
-
+  const templates = await loadTemplates(srcDir);
+  const articles = await createPages(srcDir, outDir, templates);
   await createStartPage(srcDir, outDir, articles);
   await copyAssets(srcDir, outDir);
 }
 
-async function loadLayouts(srcDir: string) {
-  const layouts = new TemplatesMap();
+async function loadTemplates(srcDir: string) {
+  const templates = new TemplatesMap();
   const base = join(srcDir, "layouts");
-  const files = await findFiles(base, "**/*.handlebars");
-  for (const file of files) {
-    const path = join(base, file);
+  const layoutNames = await findFiles(base, "**/*.handlebars");
+  for (const layoutName of layoutNames) {
+    const path = join(base, layoutName);
     const template = await loadTemplate(path);
-    layouts.set(parse(file).name, template);
+    templates.set(parse(layoutName).name, template);
   }
-  return layouts;
+  return templates;
 }
 
 async function createPages(
   srcDir: string,
   outDir: string,
-  layouts: TemplatesMap
+  templates: TemplatesMap
 ) {
-  const articleInfos: ArticleInfo[] = [];
+  const pageInfos: PageInfo[] = [];
   const srcBase = join(srcDir, "pages");
   const outBase = join(outDir, "pages");
-  const pages = await findFiles(srcBase, "**/*.md");
-  for (const page of pages) {
-    const info = await createPage(srcBase, outBase, layouts, page);
-    if (info) {
-      articleInfos.push(info);
-    }
+  const pageNames = await findFiles(srcBase, "**/*.md");
+  for (const pageName of pageNames) {
+    const pageInfo = await createPage(srcBase, outBase, templates, pageName);
+    pageInfos.push(pageInfo);
   }
-  return articleInfos;
+  return pageInfos;
 }
 
 async function createPage(
   srcBase: string,
   outBase: string,
-  layouts: TemplatesMap,
-  page: string
+  templates: TemplatesMap,
+  pageName: string
 ) {
-  const srcPath = join(srcBase, page);
-  const contents = await fs.readFile(srcPath, "utf8");
-  const article = renderer.render(contents);
-  const layout = layouts.get(article.meta.layout);
-  if (layout) {
-    const pageFile = parse(page);
-    const outFileName = `${pageFile.name}.html`;
-    const outDirPath = join(outBase, pageFile.dir);
-    const outPath = join(outDirPath, outFileName);
-    const result = layout({ article });
-    await fs.ensureDir(outDirPath);
-    await fs.writeFile(outPath, result);
-    const info = new ArticleInfo();
-    info.path = join("pages", pageFile.dir, outFileName);
-    info.meta = article.meta;
-    return info;
+  const srcPath = join(srcBase, pageName);
+  const source = await fs.readFile(srcPath, "utf8");
+  const page = renderer.render(source);
+  const layout = templates.get(page.meta.layout);
+
+  if (layout === undefined) {
+    throw new Error(`[${pageName}]: Layout [${page.meta.layout}] not found`);
   }
+
+  const pageFile = parse(pageName);
+  const outFileName = `${pageFile.name}.html`;
+  const outDirPath = join(outBase, pageFile.dir);
+  const outPath = join(outDirPath, outFileName);
+  const contents = layout({ page });
+  await fs.ensureDir(outDirPath);
+  await fs.writeFile(outPath, contents);
+  const info = new PageInfo();
+  info.path = join("pages", pageFile.dir, outFileName);
+  info.meta = page.meta;
+  return info;
 }
 
 async function createStartPage(
   srcDir: string,
   outDir: string,
-  articles: ArticleInfo[]
+  pages: PageInfo[]
 ) {
   const srcPath = join(srcDir, "index.handlebars");
   const outPath = join(outDir, "index.html");
   const template = await loadTemplate(srcPath);
-  const result = template({ articles });
-  await fs.writeFile(outPath, result);
+  const contents = template({ pages });
+  await fs.writeFile(outPath, contents);
 }
 
 async function copyAssets(srcDir: string, outDir: string) {
-  const srcAssetsDir = join(srcDir, "assets");
-  const outAssetsDir = join(outDir, "assets");
-  await fs.copy(srcAssetsDir, outAssetsDir, {
+  const srcPath = join(srcDir, "assets");
+  const outPath = join(outDir, "assets");
+  await fs.copy(srcPath, outPath, {
     recursive: true,
     overwrite: true,
   });
@@ -102,13 +101,8 @@ function findFiles(base: string, pattern: string) {
 }
 
 async function loadTemplate(path: string) {
-  const contents = await fs.readFile(path, "utf8");
-  return handlebars.compile(contents);
+  const source = await fs.readFile(path, "utf8");
+  return handlebars.compile(source);
 }
 
 class TemplatesMap extends Map<string, HandlebarsTemplateDelegate<any>> {}
-
-class ArticleInfo {
-  path: string;
-  meta: any;
-}

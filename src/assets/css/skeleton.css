@@ -188,7 +188,7 @@ body {
   font-weight: 400;
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
-  color: #234; /* #222; */
+  color: #234;
 }
 
 /* Typography
@@ -274,15 +274,16 @@ h6 {
 p {
   margin-top: 0;
   text-align: justify;
+  text-align-last: left;
 }
 
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
-  color: #1eaedb;
+  color: #798;
 }
 a:hover {
-  color: #0fa0ce;
+  color: #576;
 }
 
 /* Buttons
@@ -451,7 +452,6 @@ code {
   margin: 0 0.2rem;
   font-size: 90%;
   white-space: nowrap;
-  /* background: #f1f1f1; */
   border: 1px solid #e1e1e1;
   border-radius: 4px;
 }
@@ -484,9 +484,9 @@ td:last-child {
 blockquote {
   margin: 0;
   padding: 8px 2rem;
-  border-left: 3px solid #798; /*#e1e1e1;*/
+  border-left: 3px solid #798;
   border-radius: 4px;
-  background: #f6f8fa;
+  background: #fafafa;
 }
 
 blockquote > * {
@@ -501,16 +501,17 @@ blockquote *:last-child {
 
 /* Spacing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-button,
+/* button,
 .button {
   margin-bottom: 1rem;
-}
-input,
+} */
+/* input,
 textarea,
 select,
 fieldset {
   margin-bottom: 1.5rem;
-}
+} */
+/* form, */
 pre,
 blockquote,
 dl,
@@ -518,8 +519,7 @@ figure,
 table,
 p,
 ul,
-ol,
-form {
+ol {
   margin-bottom: 2.5rem;
 }
 

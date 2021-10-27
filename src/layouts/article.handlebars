@@ -5,15 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Blog - {{page.meta.title}}</title>
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="//fonts.googleapis.com/css?family=Raleway:300,400,600"
+      rel="preload"
+      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
     <link
-      rel="stylesheet"
-      type="text/css"
+      rel="preload"
       href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://fonts.googleapis.com/css?family=Raleway:300,400,600"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"
+      />
+    </noscript>
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/skeleton.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/highlight.css" />

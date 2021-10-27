@@ -9,7 +9,7 @@
   "keywords": [
     "static-site-generator"
   ],
-  "main": "src/index.js",
+  "main": "lib/cli.js",
   "bin": {
     "hiro": "bin/hiro"
   },

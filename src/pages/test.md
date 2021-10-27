@@ -62,7 +62,11 @@ Praesent tellus mi, vulputate vel molestie nec, imperdiet vel quam. Vivamus elem
 Sed luctus augue turpis, in pulvinar erat molestie non. Nulla leo ipsum, consequat a finibus in, aliquam ut elit. Nullam ut rutrum ipsum. Curabitur quis placerat nunc. Nullam feugiat erat ut mauris pulvinar aliquam. Integer tincidunt metus odio, vel sollicitudin odio tempus nec. Duis justo tortor, vestibulum a ultrices nec, semper non mi. Nullam quis ipsum non risus tempus ultrices. Praesent consectetur neque sit amet quam ullamcorper, id maximus felis suscipit. Sed ullamcorper purus varius, condimentum sapien ac, ultricies magna. Sed id elit tortor.
 
 ```js
+/**
+ * Some description.
+ */
 function foo(a, b) {
+  // An inline comment.
   if (a != b) {
     return 0;
   }

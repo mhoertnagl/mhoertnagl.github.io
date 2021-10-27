@@ -29,7 +29,6 @@
     </noscript>
     <link rel="stylesheet" type="text/css" href="/assets/css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="/assets/css/skeleton.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/highlight.css" />
   </head>
   <body>
     <main class="container">
@@ -87,7 +86,11 @@ Aliquam ut sollicitudin ipsum. Sed at dolor eu tortor luctus interdum ac quis au
 <p>Praesent tellus mi, vulputate vel molestie nec, imperdiet vel quam. Vivamus elementum velit neque, eget varius risus placerat ac. Sed faucibus bibendum nulla. Sed pellentesque egestas velit. Nulla condimentum libero eget libero maximus facilisis. Suspendisse laoreet urna et turpis suscipit, in pretium nisl vehicula. Suspendisse quis condimentum mauris.</p>
 <h4 id="heading-4">Heading 4</h4>
 <p>Sed luctus augue turpis, in pulvinar erat molestie non. Nulla leo ipsum, consequat a finibus in, aliquam ut elit. Nullam ut rutrum ipsum. Curabitur quis placerat nunc. Nullam feugiat erat ut mauris pulvinar aliquam. Integer tincidunt metus odio, vel sollicitudin odio tempus nec. Duis justo tortor, vestibulum a ultrices nec, semper non mi. Nullam quis ipsum non risus tempus ultrices. Praesent consectetur neque sit amet quam ullamcorper, id maximus felis suscipit. Sed ullamcorper purus varius, condimentum sapien ac, ultricies magna. Sed id elit tortor.</p>
-<pre><code class="hljs language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params">a, b</span>) {
+<pre><code class="hljs language-js"><span class="hljs-comment">/**
+ * Some description.
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-comment">// An inline comment.</span>
   <span class="hljs-keyword">if</span> (a != b) {
     <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
   }

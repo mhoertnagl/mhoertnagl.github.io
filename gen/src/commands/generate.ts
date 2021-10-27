@@ -4,19 +4,6 @@ import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
 
-class TemplatesMap extends Map<string, HandlebarsTemplateDelegate<any>> {}
-
-class ArticleInfo {
-  path: string;
-  meta: any;
-}
-
-// const spinner = ora({
-//   text: "Simulating some slow async task. What a Devimal Planet...",
-//   spinner: "earth",
-// }).start();
-// spinner.succeed("Heavy task finished!\n");
-
 export async function generate() {
   const cwd = process.cwd();
   const srcDir = join(cwd, "src");
@@ -28,11 +15,7 @@ export async function generate() {
   const articles = await createPages(srcDir, outDir, layouts);
 
   await createStartPage(srcDir, outDir, articles);
-  // Read index.handlebars
-
-  // Create HTML files
-
-  // await copyAssets(srcDir, outDir);
+  await copyAssets(srcDir, outDir);
 }
 
 async function loadLayouts(srcDir: string) {
@@ -102,14 +85,14 @@ async function createStartPage(
   await fs.writeFile(outPath, result);
 }
 
-// async function copyAssets(srcDir: string, outDir: string) {
-//   const srcAssetsDir = join(srcDir, "assets");
-//   const outAssetsDir = join(outDir, "assets");
-//   await fs.copy(srcAssetsDir, outAssetsDir, {
-//     recursive: true,
-//     overwrite: true,
-//   });
-// }
+async function copyAssets(srcDir: string, outDir: string) {
+  const srcAssetsDir = join(srcDir, "assets");
+  const outAssetsDir = join(outDir, "assets");
+  await fs.copy(srcAssetsDir, outAssetsDir, {
+    recursive: true,
+    overwrite: true,
+  });
+}
 
 function findFiles(base: string, pattern: string) {
   return glob(pattern, {
@@ -121,4 +104,11 @@ function findFiles(base: string, pattern: string) {
 async function loadTemplate(path: string) {
   const contents = await fs.readFile(path, "utf8");
   return handlebars.compile(contents);
+}
+
+class TemplatesMap extends Map<string, HandlebarsTemplateDelegate<any>> {}
+
+class ArticleInfo {
+  path: string;
+  meta: any;
 }

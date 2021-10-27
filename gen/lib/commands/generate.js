@@ -3,12 +3,6 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
-class TemplatesMap extends Map {
-}
-class ArticleInfo {
-    path;
-    meta;
-}
 export async function generate() {
     const cwd = process.cwd();
     const srcDir = join(cwd, "src");
@@ -17,6 +11,7 @@ export async function generate() {
     const layouts = await loadLayouts(srcDir);
     const articles = await createPages(srcDir, outDir, layouts);
     await createStartPage(srcDir, outDir, articles);
+    await copyAssets(srcDir, outDir);
 }
 async function loadLayouts(srcDir) {
     const layouts = new TemplatesMap();
@@ -68,6 +63,14 @@ async function createStartPage(srcDir, outDir, articles) {
     const result = template({ articles });
     await fs.writeFile(outPath, result);
 }
+async function copyAssets(srcDir, outDir) {
+    const srcAssetsDir = join(srcDir, "assets");
+    const outAssetsDir = join(outDir, "assets");
+    await fs.copy(srcAssetsDir, outAssetsDir, {
+        recursive: true,
+        overwrite: true,
+    });
+}
 function findFiles(base, pattern) {
     return glob(pattern, {
         cwd: base,
@@ -77,4 +80,10 @@ function findFiles(base, pattern) {
 async function loadTemplate(path) {
     const contents = await fs.readFile(path, "utf8");
     return handlebars.compile(contents);
+}
+class TemplatesMap extends Map {
+}
+class ArticleInfo {
+    path;
+    meta;
 }

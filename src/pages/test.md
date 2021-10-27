@@ -49,6 +49,7 @@ Vivamus turpis urna, dignissim eu mi eget, venenatis ultrices dolor. Praesent ma
 stateDiagram-v2
     [*] --> Still
     Still --> [*]
+
     Still --> Moving
     Moving --> Still
     Moving --> Crash

@@ -3,8 +3,6 @@ import marked from "marked";
 import hljs from "highlight.js";
 import { katexExtension } from "./extensions/katex";
 // import mermaid from 'mermaid'
-// import katex from 'katex'
-// import "katex/dist/katex.css";
 
 class Renderer {
   constructor() {

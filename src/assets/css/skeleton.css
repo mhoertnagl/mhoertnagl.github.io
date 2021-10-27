@@ -553,6 +553,9 @@ blockquote {
   margin: 0;
   padding: 8px 2rem;
   border-left: 3px solid #798;
+  border-top: 1px solid #e1e1e1;
+  border-right: 1px solid #e1e1e1;
+  border-bottom: 1px solid #e1e1e1;
   border-radius: 4px;
   background: #fafafa;
 }

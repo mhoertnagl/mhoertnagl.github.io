@@ -1,7 +1,7 @@
 import matter from "./matter";
 import marked from "marked";
 import hljs from "highlight.js";
-// import "highlight.js/styles/default.css";
+import { katexExtension } from "./extensions/katex";
 // import mermaid from 'mermaid'
 // import katex from 'katex'
 // import "katex/dist/katex.css";
@@ -22,26 +22,6 @@ class Renderer {
     //   },
     // }
 
-    // const latexExtension: MarkedExtension = {
-    //   renderer: {
-    //     code(code, language) {
-    //       if (language === 'katex') {
-    //         return katex.renderToString(code, {
-    //           displayMode: true,
-    //         })
-    //       }
-    //       // Use default code renderer.
-    //       return false
-    //     },
-    //     codespan(code) {
-    //       if (code.startsWith('katex')) {
-    //         return katex.renderToString(code.substring(5))
-    //       }
-    //       return false
-    //     },
-    //   },
-    // }
-
     marked.setOptions({
       highlight: (code, lang) => {
         const language = hljs.getLanguage(lang) ? lang : "plaintext";
@@ -51,7 +31,7 @@ class Renderer {
     });
 
     // marked.use(mermaidExtension)
-    // marked.use(latexExtension)
+    marked.use(katexExtension);
   }
 
   render(source: string) {

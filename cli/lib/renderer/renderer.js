@@ -1,6 +1,7 @@
 import matter from "./matter";
 import marked from "marked";
 import hljs from "highlight.js";
+import { katexExtension } from "./extensions/katex";
 class Renderer {
     constructor() {
         marked.setOptions({
@@ -10,6 +11,7 @@ class Renderer {
             },
             langPrefix: "hljs language-",
         });
+        marked.use(katexExtension);
     }
     render(source) {
         const document = matter(source.trim());

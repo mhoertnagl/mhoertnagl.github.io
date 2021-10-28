@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "commander": "^8.2.0",
+    "date-fns": "^2.25.0",
     "esm": "^3.2.25",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
@@ -29,7 +30,8 @@
     "js-yaml": "^4.1.0",
     "katex": "^0.13.20",
     "marked": "^3.0.8",
-    "ora": "^6.0.1"
+    "ora": "^6.0.1",
+    "reading-time": "^1.5.0"
   },
   "devDependencies": {
     "@types/commander": "^2.12.2",

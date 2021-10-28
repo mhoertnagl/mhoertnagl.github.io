@@ -3,7 +3,26 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
-import { PageInfo } from "../renderer/page";
+import Page from "../renderer/page";
+import * as dateFns from "date-fns";
+import readingTime from "reading-time";
+
+// TODO: Move to different location.
+handlebars.registerHelper("formatDate", (date: Date, fmt: string) => {
+  const d = new Date(date);
+  const parts = fmt.split("|");
+
+  if (parts.length === 1) {
+    return dateFns.format(d, parts[0]!);
+  }
+  if (parts.length === 2) {
+    if (d.getFullYear() === new Date().getFullYear()) {
+      return dateFns.format(d, parts[0]!);
+    }
+    return dateFns.format(d, parts[0]! + parts[1]!);
+  }
+  return "???";
+});
 
 export async function generate() {
   const cwd = process.cwd();
@@ -11,8 +30,8 @@ export async function generate() {
   const outDir = join(cwd, "docs");
   await fs.ensureDir(outDir);
   const templates = await loadTemplates(srcDir);
-  const articles = await createPages(srcDir, outDir, templates);
-  await createStartPage(srcDir, outDir, articles);
+  const pages = await createPages(srcDir, outDir, templates);
+  await createStartPage(srcDir, outDir, pages);
   await copyAssets(srcDir, outDir);
 }
 
@@ -33,15 +52,15 @@ async function createPages(
   outDir: string,
   templates: TemplatesMap
 ) {
-  const pageInfos: PageInfo[] = [];
+  const pages: Page[] = [];
   const srcBase = join(srcDir, "pages");
   const outBase = join(outDir, "pages");
   const pageNames = await findFiles(srcBase, "**/*.md");
   for (const pageName of pageNames) {
-    const pageInfo = await createPage(srcBase, outBase, templates, pageName);
-    pageInfos.push(pageInfo);
+    const page = await createPage(srcBase, outBase, templates, pageName);
+    pages.push(page);
   }
-  return pageInfos;
+  return pages;
 }
 
 async function createPage(
@@ -61,22 +80,22 @@ async function createPage(
 
   const pageFile = parse(pageName);
   const outFileName = `${pageFile.name}.html`;
+
+  page.path = join("pages", pageFile.dir, outFileName);
+  page.readTime = readingTime(source);
+
+  const contents = layout({ page });
+
   const outDirPath = join(outBase, pageFile.dir);
   const outPath = join(outDirPath, outFileName);
-  const contents = layout({ page });
+
   await fs.ensureDir(outDirPath);
   await fs.writeFile(outPath, contents);
-  const info = new PageInfo();
-  info.path = join("pages", pageFile.dir, outFileName);
-  info.meta = page.meta;
-  return info;
+
+  return page;
 }
 
-async function createStartPage(
-  srcDir: string,
-  outDir: string,
-  pages: PageInfo[]
-) {
+async function createStartPage(srcDir: string, outDir: string, pages: Page[]) {
   const srcPath = join(srcDir, "index.handlebars");
   const outPath = join(outDir, "index.html");
   const template = await loadTemplate(srcPath);

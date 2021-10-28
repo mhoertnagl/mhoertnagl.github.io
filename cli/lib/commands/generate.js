@@ -3,15 +3,30 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
-import { PageInfo } from "../renderer/page";
+import * as dateFns from "date-fns";
+import readingTime from "reading-time";
+handlebars.registerHelper("formatDate", (date, fmt) => {
+    const d = new Date(date);
+    const parts = fmt.split("|");
+    if (parts.length === 1) {
+        return dateFns.format(d, parts[0]);
+    }
+    if (parts.length === 2) {
+        if (d.getFullYear() === new Date().getFullYear()) {
+            return dateFns.format(d, parts[0]);
+        }
+        return dateFns.format(d, parts[0] + parts[1]);
+    }
+    return "???";
+});
 export async function generate() {
     const cwd = process.cwd();
     const srcDir = join(cwd, "src");
     const outDir = join(cwd, "docs");
     await fs.ensureDir(outDir);
     const templates = await loadTemplates(srcDir);
-    const articles = await createPages(srcDir, outDir, templates);
-    await createStartPage(srcDir, outDir, articles);
+    const pages = await createPages(srcDir, outDir, templates);
+    await createStartPage(srcDir, outDir, pages);
     await copyAssets(srcDir, outDir);
 }
 async function loadTemplates(srcDir) {
@@ -26,15 +41,15 @@ async function loadTemplates(srcDir) {
     return templates;
 }
 async function createPages(srcDir, outDir, templates) {
-    const pageInfos = [];
+    const pages = [];
     const srcBase = join(srcDir, "pages");
     const outBase = join(outDir, "pages");
     const pageNames = await findFiles(srcBase, "**/*.md");
     for (const pageName of pageNames) {
-        const pageInfo = await createPage(srcBase, outBase, templates, pageName);
-        pageInfos.push(pageInfo);
+        const page = await createPage(srcBase, outBase, templates, pageName);
+        pages.push(page);
     }
-    return pageInfos;
+    return pages;
 }
 async function createPage(srcBase, outBase, templates, pageName) {
     const srcPath = join(srcBase, pageName);
@@ -46,15 +61,14 @@ async function createPage(srcBase, outBase, templates, pageName) {
     }
     const pageFile = parse(pageName);
     const outFileName = `${pageFile.name}.html`;
+    page.path = join("pages", pageFile.dir, outFileName);
+    page.readTime = readingTime(source);
+    const contents = layout({ page });
     const outDirPath = join(outBase, pageFile.dir);
     const outPath = join(outDirPath, outFileName);
-    const contents = layout({ page });
     await fs.ensureDir(outDirPath);
     await fs.writeFile(outPath, contents);
-    const info = new PageInfo();
-    info.path = join("pages", pageFile.dir, outFileName);
-    info.meta = page.meta;
-    return info;
+    return page;
 }
 async function createStartPage(srcDir, outDir, pages) {
     const srcPath = join(srcDir, "index.handlebars");

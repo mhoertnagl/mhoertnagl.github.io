@@ -53,8 +53,8 @@ async function createPages(srcDir, outDir, templates) {
 }
 async function createPage(srcBase, outBase, templates, pageName) {
     const srcPath = join(srcBase, pageName);
-    const source = await fs.readFile(srcPath, "utf8");
-    const page = renderer.render(source);
+    const markdown = await fs.readFile(srcPath, "utf8");
+    const page = renderer.render(markdown);
     const layout = templates.get(page.meta.layout);
     if (layout === undefined) {
         throw new Error(`[${pageName}]: Layout [${page.meta.layout}] not found`);
@@ -62,12 +62,12 @@ async function createPage(srcBase, outBase, templates, pageName) {
     const pageFile = parse(pageName);
     const outFileName = `${pageFile.name}.html`;
     page.path = join("pages", pageFile.dir, outFileName);
-    page.readTime = readingTime(source);
-    const contents = layout({ page });
+    page.readTime = readingTime(markdown);
+    const html = layout({ page });
     const outDirPath = join(outBase, pageFile.dir);
     const outPath = join(outDirPath, outFileName);
     await fs.ensureDir(outDirPath);
-    await fs.writeFile(outPath, contents);
+    await fs.writeFile(outPath, html);
     return page;
 }
 async function createStartPage(srcDir, outDir, pages) {

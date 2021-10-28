@@ -23,7 +23,10 @@
   <body>
     <main class="container">
       {{#pages}}
-        <h5><a href="{{path}}">{{meta.title}}</a></h5>
+        <section>
+          <div>{{meta.title}}</div>
+          <a href="{{path}}">Continue</a>
+        </section>
       {{/pages}}
     </main>
   </body>

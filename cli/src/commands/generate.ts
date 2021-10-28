@@ -70,8 +70,8 @@ async function createPage(
   pageName: string
 ) {
   const srcPath = join(srcBase, pageName);
-  const source = await fs.readFile(srcPath, "utf8");
-  const page = renderer.render(source);
+  const markdown = await fs.readFile(srcPath, "utf8");
+  const page = renderer.render(markdown);
   const layout = templates.get(page.meta.layout);
 
   if (layout === undefined) {
@@ -82,15 +82,15 @@ async function createPage(
   const outFileName = `${pageFile.name}.html`;
 
   page.path = join("pages", pageFile.dir, outFileName);
-  page.readTime = readingTime(source);
+  page.readTime = readingTime(markdown);
 
-  const contents = layout({ page });
+  const html = layout({ page });
 
   const outDirPath = join(outBase, pageFile.dir);
   const outPath = join(outDirPath, outFileName);
 
   await fs.ensureDir(outDirPath);
-  await fs.writeFile(outPath, contents);
+  await fs.writeFile(outPath, html);
 
   return page;
 }

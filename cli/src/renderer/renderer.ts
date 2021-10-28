@@ -36,6 +36,7 @@ class Renderer {
   render(source: string) {
     const document = matter(source.trim());
     document.contents = marked(document.contents);
+    // document.synopsis =
     return document;
   }
 }

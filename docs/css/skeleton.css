@@ -181,6 +181,8 @@ html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
   font-size: 62.5%;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
   overflow-y: scroll;
 }
 body {
@@ -190,7 +192,7 @@ body {
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   color: #234;
-  height: 100%;
+  margin: 0;
 }
 
 /* Typography
@@ -294,6 +296,10 @@ header .header-blog-name {
   color: #234;
 }
 
+main {
+  display: block;
+}
+
 main.container {
   margin-top: 10rem;
 }
@@ -342,12 +348,14 @@ img {
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
+  border-style: none;
   border-radius: 4px;
 }
 
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
+  background-color: transparent;
   color: #798;
 }
 a:hover {
@@ -688,6 +696,9 @@ ol {
 /* Misc
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
   margin-top: 3rem;
   margin-bottom: 3.5rem;
   border-width: 0;

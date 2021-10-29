@@ -93,9 +93,8 @@ async function createStartPage(srcDir: string, outDir: string, pages: Page[]) {
 }
 
 async function copyAssets(srcDir: string, outDir: string) {
-  const srcPath = join(srcDir, "assets");
-  const outPath = join(outDir, "assets");
-  await fs.copy(srcPath, outPath, {
+  const srcPath = join(srcDir, "public");
+  await fs.copy(srcPath, outDir, {
     recursive: true,
     overwrite: true,
   });

@@ -181,6 +181,7 @@ html is set to 62.5% so that all the REM measurements throughout Skeleton
 are based on 10px sizing. So basically 1.5rem = 15px :) */
 html {
   font-size: 62.5%;
+  overflow-y: scroll;
 }
 body {
   font-size: 1.5em; /* currently ems cause chrome bug misinterpreting rems on body element */
@@ -189,12 +190,13 @@ body {
   font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
   color: #234;
+  height: 100%;
 }
 
 /* Typography
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 h1 {
-  margin-top: 8rem;
+  margin-top: 0;
   margin-bottom: 3rem;
   font-weight: 300;
 }
@@ -271,12 +273,33 @@ h6 {
   }
 }
 
-/* Article Teasers
+/* Header
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
-.article-teasers {
-  margin-top: 8rem;
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f4f4f4;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(5px);
+  z-index: 1;
 }
 
+header .header-blog-name {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-decoration: none;
+  color: #234;
+}
+
+main.container {
+  margin-top: 10rem;
+}
+
+/* Article Teasers
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
 .article-teaser {
   margin-bottom: 2.5rem;
   text-decoration: none;

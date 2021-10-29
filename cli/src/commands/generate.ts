@@ -4,25 +4,8 @@ import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
 import Page from "../renderer/page";
-import * as dateFns from "date-fns";
 import readingTime from "reading-time";
-
-// TODO: Move to different location.
-handlebars.registerHelper("formatDate", (date: Date, fmt: string) => {
-  const d = new Date(date);
-  const parts = fmt.split("|");
-
-  if (parts.length === 1) {
-    return dateFns.format(d, parts[0]!);
-  }
-  if (parts.length === 2) {
-    if (d.getFullYear() === new Date().getFullYear()) {
-      return dateFns.format(d, parts[0]!);
-    }
-    return dateFns.format(d, parts[0]! + parts[1]!);
-  }
-  return "???";
-});
+import "../helpers/formatDate";
 
 export async function generate() {
   const cwd = process.cwd();
@@ -35,6 +18,7 @@ export async function generate() {
   await copyAssets(srcDir, outDir);
 }
 
+// TODO: lazy template loading.
 async function loadTemplates(srcDir: string) {
   const templates = new TemplatesMap();
   const base = join(srcDir, "layouts");
@@ -119,6 +103,7 @@ function findFiles(base: string, pattern: string) {
   });
 }
 
+// TODO: lazy template loading.
 async function loadTemplate(path: string) {
   const source = await fs.readFile(path, "utf8");
   return handlebars.compile(source);

@@ -3,22 +3,8 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
-import * as dateFns from "date-fns";
 import readingTime from "reading-time";
-handlebars.registerHelper("formatDate", (date, fmt) => {
-    const d = new Date(date);
-    const parts = fmt.split("|");
-    if (parts.length === 1) {
-        return dateFns.format(d, parts[0]);
-    }
-    if (parts.length === 2) {
-        if (d.getFullYear() === new Date().getFullYear()) {
-            return dateFns.format(d, parts[0]);
-        }
-        return dateFns.format(d, parts[0] + parts[1]);
-    }
-    return "???";
-});
+import "../helpers/formatDate";
 export async function generate() {
     const cwd = process.cwd();
     const srcDir = join(cwd, "src");

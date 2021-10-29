@@ -6,3 +6,9 @@ tags: test
 ---
 
 ## Another Testpage
+
+```csharp
+public static class Test {
+
+}
+```

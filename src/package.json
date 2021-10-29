@@ -1,0 +1,16 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "repository": "",
+  "description": "Hiro Static Site Generator Blog",
+  "author": "Mathias Hörtnagl",
+  "license": "MIT",
+  "scripts": {
+    "serve": "http-server ../docs"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+    "http-server": "^14.0.0"
+  }
+}

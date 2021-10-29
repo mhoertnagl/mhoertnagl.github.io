@@ -3,6 +3,7 @@ import glob from "fast-glob";
 import { join, parse } from "path";
 import handlebars from "handlebars";
 import renderer from "../renderer/renderer";
+import { minify } from "html-minifier-terser";
 import readingTime from "reading-time";
 import "../helpers/formatDate";
 export async function generate() {
@@ -55,10 +56,19 @@ async function createPage(srcBase, outBase, templates, pageName) {
     page.path = join("pages", pageFile.dir, outFileName);
     page.readTime = readingTime(markdown);
     const html = layout({ page });
+    const minHtml = await minify(html, {
+        collapseBooleanAttributes: true,
+        collapseWhitespace: true,
+        removeComments: true,
+        removeEmptyAttributes: true,
+        removeEmptyElements: true,
+        removeOptionalTags: true,
+        removeRedundantAttributes: true,
+    });
     const outDirPath = join(outBase, pageFile.dir);
     const outPath = join(outDirPath, outFileName);
     await fs.ensureDir(outDirPath);
-    await fs.writeFile(outPath, html);
+    await fs.writeFile(outPath, minHtml);
     return page;
 }
 async function createStartPage(srcDir, outDir, pages) {

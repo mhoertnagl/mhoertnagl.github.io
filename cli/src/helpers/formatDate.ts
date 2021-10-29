@@ -12,7 +12,7 @@ import * as dateFns from "date-fns";
  *
  *    "MMM d"           // i.e. Oct 24
  *
- * and if the date is in any year else, the format will be
+ * and if the date is in any other year, the format will be
  *
  *    "MMM d',' yyyy"   // i.e. Oct 24, 2020
  */

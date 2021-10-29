@@ -1,4 +1,4 @@
-import matter from "./matter";
+import parseFrontMatter from "./matter";
 import marked from "marked";
 import hljs from "highlight.js";
 import { katexExtension } from "./extensions/katex";
@@ -14,7 +14,7 @@ class Renderer {
         marked.use(katexExtension);
     }
     render(source) {
-        const document = matter(source.trim());
+        const document = parseFrontMatter(source.trim());
         document.contents = marked(document.contents);
         return document;
     }

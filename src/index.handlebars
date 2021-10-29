@@ -22,12 +22,19 @@
   </head>
   <body>
     <main class="container">
+      <div class="article-teasers">
       {{#pages}}
-        <section>
-          <div>{{meta.title}}</div>
-          <a href="{{path}}">Continue</a>
-        </section>
+        <a href="{{path}}" class="article-teaser">
+          <div class="article-teaser-info">
+            <span>{{formatDate meta.date "MMM d|',' yyyy"}}</span>
+            <span>⸰</span>
+            <span>{{readTime.text}}</span>
+          </div>
+          <div class="article-teaser-title">{{meta.title}}</div>
+          <p class="article-teaser-synopsis">{{meta.synopsis}}</p>
+        </a>
       {{/pages}}
+      </div>
     </main>
   </body>
 </html>

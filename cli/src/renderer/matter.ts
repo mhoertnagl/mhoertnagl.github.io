@@ -3,7 +3,7 @@ import Page, { PageMeta } from "./page";
 
 const re = /^(-{3}(?:\n|\r)([\w\W]+?)(?:\n|\r)-{3})?([\w\W]*)*/;
 
-export default function parse(text: string) {
+export default function parseFrontMatter(text: string) {
   const matches = re.exec(text);
   const result = new Page();
   if (matches) {

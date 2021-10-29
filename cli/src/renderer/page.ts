@@ -3,7 +3,6 @@ import { ReadTimeResults } from "reading-time";
 export default class Page {
   path: string = "";
   meta: PageMeta = new PageMeta();
-  synopsis: string = "";
   contents: string = "";
   readTime: ReadTimeResults = {
     text: "",
@@ -16,5 +15,6 @@ export default class Page {
 export class PageMeta {
   layout: string = "";
   title: string = "";
+  synopsis: string = "";
   date: string = "";
 }

@@ -1,7 +1,6 @@
 export default class Page {
     path = "";
     meta = new PageMeta();
-    synopsis = "";
     contents = "";
     readTime = {
         text: "",
@@ -13,5 +12,6 @@ export default class Page {
 export class PageMeta {
     layout = "";
     title = "";
+    synopsis = "";
     date = "";
 }

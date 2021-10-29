@@ -35,6 +35,11 @@ async function createPages(srcDir, outDir, templates) {
         const page = await createPage(srcBase, outBase, templates, pageName);
         pages.push(page);
     }
+    pages.sort((a, b) => {
+        const da = a.meta.date;
+        const db = b.meta.date;
+        return da < db ? 1 : da > db ? -1 : 0;
+    });
     return pages;
 }
 async function createPage(srcBase, outBase, templates, pageName) {

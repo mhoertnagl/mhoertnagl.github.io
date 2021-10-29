@@ -10,6 +10,8 @@
     "static-site-generator"
   ],
   "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc",
     "serve": "http-server ../docs"
   },
   "main": "lib/cli.js",

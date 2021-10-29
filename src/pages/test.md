@@ -92,7 +92,7 @@ Inline KaTeX `katex \sum^{n}_{i=0} \mathbb{K}(i)`. Curabitur pulvinar egestas do
 
 ###### Heading 6
 
-**Phasellus** eget nisi lobortis, volutpat lorem non, vulputate libero. Sed augue nunc, porttitor eget leo sed, porta maximus massa. Aliquam sit amet purus ut velit maximus maximus. Phasellus vel libero ac leo euismod pretium a sit amet nisi.
+**Phasellus** eget nisi lobortis, volutpat lorem non, vulputate libero. Sed augue nunc, porttitor eget leo sed, porta maximus massa. Aliquam sit amet purus ut velit maximus maximus. [Another link](foo/test2.html) Phasellus vel libero ac leo euismod pretium a sit amet nisi.
 
 | a1  | b1  | c1  | d1  | e1  |
 | --- | --- | --- | --- | --- |
@@ -100,7 +100,4 @@ Inline KaTeX `katex \sum^{n}_{i=0} \mathbb{K}(i)`. Curabitur pulvinar egestas do
 | a3  | b3  | c3  | d3  | e3  |
 | a4  | b4  | c4  | d4  | e4  |
 
-Nam egestas elit eros, eget convallis nulla viverra viverra. Phasellus sed purus sapien. Donec quis porta justo, at auctor mauris. Nam sed eros vel diam ornare cursus. In bibendum orci eu luctus pellentesque. In lacinia consectetur molestie. Fusce interdum neque in augue porttitor, ut semper nulla imperdiet.
-
-[This is a link](https://google.com)
-[Another link](foo/test2.html)
+Nam egestas elit eros, eget convallis nulla viverra viverra. Phasellus sed purus sapien. Donec quis porta justo, at auctor mauris. [This is a link](https://google.com) Nam sed eros vel diam ornare cursus. In bibendum orci eu luctus pellentesque. In lacinia consectetur molestie. Fusce interdum neque in augue porttitor, ut semper nulla imperdiet.

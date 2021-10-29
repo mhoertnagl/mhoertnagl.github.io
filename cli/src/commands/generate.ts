@@ -80,7 +80,7 @@ async function createPage(
     collapseWhitespace: true,
     removeComments: true,
     removeEmptyAttributes: true,
-    removeEmptyElements: true,
+    // removeEmptyElements: true,
     removeOptionalTags: true,
     removeRedundantAttributes: true,
   });

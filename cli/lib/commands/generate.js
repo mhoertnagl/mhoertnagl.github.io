@@ -61,7 +61,6 @@ async function createPage(srcBase, outBase, templates, pageName) {
         collapseWhitespace: true,
         removeComments: true,
         removeEmptyAttributes: true,
-        removeEmptyElements: true,
         removeOptionalTags: true,
         removeRedundantAttributes: true,
     });

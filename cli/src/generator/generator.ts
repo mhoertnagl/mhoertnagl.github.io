@@ -5,7 +5,7 @@ import { minify } from "html-minifier-terser";
 import LayoutsCache from "./layouts-cache";
 import Page from "./renderer/page";
 import Renderer from "./renderer/renderer";
-import "./helpers/formatDate";
+import registerFormatDate from "./helpers/formatDate";
 import findFiles from "../utils/find-files";
 
 export default class Generator {
@@ -30,6 +30,8 @@ export default class Generator {
     this.pages = [];
     this.renderer = new Renderer();
     this.cache = new LayoutsCache(join(srcRoot, "layouts"));
+
+    registerFormatDate();
   }
 
   async generateAll() {

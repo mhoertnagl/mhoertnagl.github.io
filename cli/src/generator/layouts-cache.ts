@@ -1,7 +1,7 @@
 import fs from "fs-extra";
 import { join } from "path";
 import handlebars from "handlebars";
-import "./helpers/formatDate";
+import registerFormatDate from "./helpers/formatDate";
 
 export default class LayoutsCache {
   private readonly layoutsRoot: string;
@@ -15,6 +15,8 @@ export default class LayoutsCache {
   constructor(layoutsRoot: string) {
     this.layoutsRoot = layoutsRoot;
     this.layouts = new LayoutsMap();
+
+    registerFormatDate();
   }
 
   /**

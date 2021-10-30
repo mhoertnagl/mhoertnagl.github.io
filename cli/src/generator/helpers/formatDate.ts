@@ -16,18 +16,20 @@ import * as dateFns from "date-fns";
  *
  *    "MMM d',' yyyy"   // i.e. Oct 24, 2020
  */
-handlebars.registerHelper("formatDate", (date: Date, fmt: string) => {
-  const d = new Date(date);
-  const parts = fmt.split("|");
+export default function registerFormatDate() {
+  handlebars.registerHelper("formatDate", (date: Date, fmt: string) => {
+    const d = new Date(date);
+    const parts = fmt.split("|");
 
-  if (parts.length === 1) {
-    return dateFns.format(d, parts[0]!);
-  }
-  if (parts.length === 2) {
-    if (d.getFullYear() === new Date().getFullYear()) {
+    if (parts.length === 1) {
       return dateFns.format(d, parts[0]!);
     }
-    return dateFns.format(d, parts[0]! + parts[1]!);
-  }
-  return "???";
-});
+    if (parts.length === 2) {
+      if (d.getFullYear() === new Date().getFullYear()) {
+        return dateFns.format(d, parts[0]!);
+      }
+      return dateFns.format(d, parts[0]! + parts[1]!);
+    }
+    return "???";
+  });
+}

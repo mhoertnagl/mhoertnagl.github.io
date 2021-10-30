@@ -1,6 +1,8 @@
 import { ReadTimeResults } from "reading-time";
 
 export default class Page {
+  filename: string = "";
+  dir: string = "";
   path: string = "";
   meta: PageMeta = new PageMeta();
   contents: string = "";

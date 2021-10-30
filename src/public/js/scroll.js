@@ -36,5 +36,6 @@ class ProgressBar {
     this.progress.style.width = width;
   }
 }
-
-new ProgressBar('article-progess');
+document.addEventListener("DOMContentLoaded", () => {
+  new ProgressBar('article-progess');
+});

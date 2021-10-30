@@ -1,10 +1,11 @@
 import parseFrontMatter from "./matter";
 import marked from "marked";
+import readingTime from "reading-time";
 import hljs from "highlight.js";
 import { katexExtension } from "./extensions/katex";
 // import mermaid from 'mermaid'
 
-class Renderer {
+export default class Renderer {
   constructor() {
     // https://mermaid-js.github.io/mermaid/#/usage
     // mermaid.initialize({})
@@ -33,11 +34,11 @@ class Renderer {
     marked.use(katexExtension);
   }
 
-  render(source: string) {
-    const document = parseFrontMatter(source.trim());
-    document.contents = marked(document.contents);
-    return document;
+  render(md: string) {
+    const page = parseFrontMatter(md.trim());
+    page.contents = marked(page.contents);
+    // Estimate the reading time for this page.
+    page.readTime = readingTime(md);
+    return page;
   }
 }
-
-export default new Renderer();

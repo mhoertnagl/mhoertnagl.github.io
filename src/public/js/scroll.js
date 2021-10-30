@@ -2,13 +2,13 @@ class ProgressBar {
 
   constructor(id) {
     this.progress = document.getElementById(id);
-    this.documentHeight = document.body.scrollHeight;
-    this.documentWidth = document.body.scrollWidth;
     this.lastKnownScrollPosition = 0;
     this.ticking = false;
 
     document.addEventListener('scroll', () => this.onScroll());
     window.addEventListener('resize', () => this.onResize());
+
+    this.getDocumentSize();
   }
 
   onScroll() {
@@ -25,8 +25,13 @@ class ProgressBar {
   }
 
   onResize() {
-    this.documentWidth = document.body.scrollWidth;
+    this.getDocumentSize();
     this.updateProgress(this.lastKnownScrollPosition);
+  }
+
+  getDocumentSize() {
+    this.documentHeight = document.body.scrollHeight;
+    this.documentWidth = document.body.scrollWidth;
   }
 
   updateProgress(scrollPos) {

@@ -4,7 +4,7 @@ import handlebars from "handlebars";
 import { minify } from "html-minifier-terser";
 import LayoutsCache from "./layouts-cache";
 import Renderer from "./renderer/renderer";
-import "./helpers/formatDate";
+import registerFormatDate from "./helpers/formatDate";
 import findFiles from "../utils/find-files";
 export default class Generator {
     srcRoot;
@@ -26,6 +26,7 @@ export default class Generator {
         this.pages = [];
         this.renderer = new Renderer();
         this.cache = new LayoutsCache(join(srcRoot, "layouts"));
+        registerFormatDate();
     }
     async generateAll() {
         await fs.ensureDir(this.outRoot);

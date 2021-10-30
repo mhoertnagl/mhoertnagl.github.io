@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "minify:css:katex": "npx postcss assets/css/katex.css > public/css/katex.css",
-    "minfiy:css": "npx postcss assets/css/skeleton.css > public/css/skeleton.css",
+    "minify:css": "npx postcss assets/css/skeleton.css > public/css/skeleton.css",
     "serve": "http-server ../docs"
   },
   "dependencies": {},

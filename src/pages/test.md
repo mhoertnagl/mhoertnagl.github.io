@@ -12,7 +12,7 @@ Phasellus sapien lacus, auctor ac est a, faucibus sollicitudin odio. Vestibulum 
 
 Proin pharetra, est at faucibus porttitor, diam ipsum consectetur ligula, dictum egestas neque ipsum ut mauris. In enim nisi, pulvinar ac porttitor nec, mattis eu diam.
 
-![Canyon](https://picsum.photos/1000/500)
+<img src="https://picsum.photos/960/480" alt="Canyon" width="960" height="480" />
 
 > Fusce ultricies convallis euismod. Sed nec enim nec nunc commodo vestibulum.
 > In ultrices sit amet eros nec porta.
@@ -20,7 +20,7 @@ Proin pharetra, est at faucibus porttitor, diam ipsum consectetur ligula, dictum
 
 > > Sed at dolor eu tortor luctus interdum ac quis augue. Vestibulum ac metus metus.
 
-![Canyon](https://picsum.photos/400/300)
+<img src="https://picsum.photos/400/300" alt="Canyon" width="400" height="300" />
 
 Cras hendrerit convallis porttitor. Aliquam risus lectus, interdum id pharetra nec, fermentum ut augue. Suspendisse erat est, pulvinar vitae congue vel, pellentesque et leo. Nunc et tellus vulputate, vehicula nisi ut, cursus leo. Donec in odio facilisis, commodo quam ut, rhoncus dolor. Aliquam erat volutpat.
 
@@ -48,6 +48,8 @@ Aliquam porta, magna vitae ultrices sodales, leo turpis sagittis felis, et dapib
 
 Vivamus turpis urna, dignissim eu mi eget, venenatis ultrices dolor. Praesent mauris mauris, suscipit sed velit id, vestibulum mattis nunc. Maecenas vel mi sed tellus volutpat fermentum. Morbi eget pellentesque augue. Aliquam ut sollicitudin ipsum. Sed at dolor eu tortor luctus interdum ac quis augue. Vestibulum ac metus metus.
 
+<img src="../images/mermaid-0.svg" width="200" height="358" />
+
 ```mermaid
 stateDiagram-v2
     [*] --> Still
@@ -63,7 +65,7 @@ Praesent tellus mi, vulputate vel molestie nec, imperdiet vel quam. Vivamus elem
 
 #### Heading 4
 
-Sed luctus augue turpis, in pulvinar erat molestie non. Nulla leo ipsum, consequat a finibus in, aliquam ut elit. Nullam ut rutrum ipsum. Curabitur quis placerat nunc. Nullam feugiat erat ut mauris pulvinar aliquam. Integer tincidunt metus odio, vel sollicitudin odio tempus nec. Duis justo tortor, vestibulum a ultrices nec, semper non mi. Nullam quis ipsum non risus tempus ultrices. Praesent consectetur neque sit amet quam ullamcorper, id maximus felis suscipit. Sed ullamcorper purus varius, condimentum sapien ac, ultricies magna. Sed id elit tortor.
+Sed luctus augue turpis, `in pulvinar erat molestie` non. Nulla leo ipsum, consequat a finibus in, aliquam ut elit. Nullam ut rutrum ipsum. Curabitur quis placerat nunc. Nullam feugiat erat ut mauris pulvinar aliquam. Integer tincidunt metus odio, vel sollicitudin odio tempus nec. Duis justo tortor, vestibulum a ultrices nec, semper non mi. Nullam quis ipsum non risus tempus ultrices. Praesent consectetur neque sit amet quam ullamcorper, id maximus felis suscipit. Sed ullamcorper purus varius, condimentum sapien ac, ultricies magna. Sed id elit tortor.
 
 ```js
 /**
@@ -89,6 +91,12 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat eget dui
 ```
 
 Inline KaTeX `katex \sum^{n}_{i=0} \mathbb{K}(i)`. Curabitur pulvinar egestas dolor nec congue. Integer aliquet mauris non semper volutpat. Mauris hendrerit mattis egestas. Donec mattis orci vel libero auctor malesuada. Aliquam id vehicula magna. Duis placerat sit amet velit et rhoncus. Praesent quis dui vitae risus dapibus pellentesque eget et quam. Praesent ornare volutpat dignissim. Aenean ac massa ultricies mauris imperdiet lobortis a in orci.
+
+| a1  | b1  | c1  | d1  | e1  |
+| --- | --- | --- | --- | --- |
+| a2  | b2  | c2  | d2  | e2  |
+| a3  | b3  | c3  | d3  | e3  |
+| a4  | b4  | c4  | d4  | e4  |
 
 ###### Heading 6
 

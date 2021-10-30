@@ -1,13 +1,14 @@
 import fs from "fs-extra";
 import { join } from "path";
 import handlebars from "handlebars";
-import "./helpers/formatDate";
+import registerFormatDate from "./helpers/formatDate";
 export default class LayoutsCache {
     layoutsRoot;
     layouts;
     constructor(layoutsRoot) {
         this.layoutsRoot = layoutsRoot;
         this.layouts = new LayoutsMap();
+        registerFormatDate();
     }
     async findLayout(layoutName) {
         if (this.layouts.has(layoutName) === false) {

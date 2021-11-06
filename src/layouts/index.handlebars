@@ -32,12 +32,12 @@
     {{#pages}}
       <a href="{{path}}" class="article-teaser">
         <div class="article-teaser-info">
-          <span>{{formatDate meta.date "MMM d|',' yyyy"}}</span>
+          <span>{{formatDate matter.date "MMM d|',' yyyy"}}</span>
           <span>⸰</span>
           <span>{{readTime.text}}</span>
         </div>
-        <div class="article-teaser-title">{{meta.title}}</div>
-        <p class="article-teaser-synopsis">{{meta.synopsis}}</p>
+        <div class="article-teaser-title">{{matter.title}}</div>
+        <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
       </a>
     {{/pages}}
     </main>

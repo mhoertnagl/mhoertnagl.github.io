@@ -6,12 +6,28 @@ date: 2021-10-29
 tags: test
 ---
 
-## Another Testpage
+# GFM
 
-This is Test 3
+## Autolink literals
 
-```csharp
-public static class Test {
+www.example.com, https://example.com, and contact@example.com.
 
-}
-```
+## Footnote
+
+A note[^1]
+
+[^1]: Big note.
+
+## Strikethrough
+
+~one~ or ~~two~~ tildes.
+
+## Table
+
+| a   | b   |   c |  d  |
+| --- | :-- | --: | :-: |
+
+## Tasklist
+
+- [ ] to do
+- [x] done

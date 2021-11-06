@@ -50,7 +50,7 @@ Vivamus turpis urna, dignissim eu mi eget, venenatis ultrices dolor. Praesent ma
 
 <img src="../images/mermaid-0.svg" width="200" height="358" />
 
-```mermaid
+```
 stateDiagram-v2
     [*] --> Still
     Still --> [*]
@@ -86,11 +86,11 @@ Curabitur gravida dignissim nisi, vel suscipit massa commodo a. Proin auctor tin
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat eget dui ac dapibus. Nulla accumsan felis quis laoreet vehicula.
 
-```katex
+```
 \sum^{n}_{i=0} i
 ```
 
-Inline KaTeX `katex \sum^{n}_{i=0} \mathbb{K}(i)`. Curabitur pulvinar egestas dolor nec congue. Integer aliquet mauris non semper volutpat. Mauris hendrerit mattis egestas. Donec mattis orci vel libero auctor malesuada. Aliquam id vehicula magna. Duis placerat sit amet velit et rhoncus. Praesent quis dui vitae risus dapibus pellentesque eget et quam. Praesent ornare volutpat dignissim. Aenean ac massa ultricies mauris imperdiet lobortis a in orci.
+Inline KaTeX `\sum^{n}_{i=0} \mathbb{K}(i)`. Curabitur pulvinar egestas dolor nec congue. Integer aliquet mauris non semper volutpat. Mauris hendrerit mattis egestas. Donec mattis orci vel libero auctor malesuada. Aliquam id vehicula magna. Duis placerat sit amet velit et rhoncus. Praesent quis dui vitae risus dapibus pellentesque eget et quam. Praesent ornare volutpat dignissim. Aenean ac massa ultricies mauris imperdiet lobortis a in orci.
 
 | a1  | b1  | c1  | d1  | e1  |
 | --- | --- | --- | --- | --- |

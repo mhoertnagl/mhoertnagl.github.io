@@ -95,35 +95,35 @@ Aliquam ut sollicitudin ipsum. Sed at dolor eu tortor luctus interdum ac quis au
 <h3>Heading 3</h3>
 <p>Vivamus turpis urna, dignissim eu mi eget, venenatis ultrices dolor. Praesent mauris mauris, suscipit sed velit id, vestibulum mattis nunc. Maecenas vel mi sed tellus volutpat fermentum. Morbi eget pellentesque augue. Aliquam ut sollicitudin ipsum. Sed at dolor eu tortor luctus interdum ac quis augue. Vestibulum ac metus metus.</p>
 <img src="../images/mermaid-0.svg" width="200" height="358" />
-<pre><code class="language-mermaid">stateDiagram-v2
-    [*] --> Still
-    Still --> [*]
+<pre><code class="hljs language-lua">stateDiagram-v2
+    [*] <span class="hljs-comment">--> Still</span>
+    Still <span class="hljs-comment">--> [*]</span>
 
-    Still --> Moving
-    Moving --> Still
-    Moving --> Crash
-    Crash --> [*]
+    Still <span class="hljs-comment">--> Moving</span>
+    Moving <span class="hljs-comment">--> Still</span>
+    Moving <span class="hljs-comment">--> Crash</span>
+    Crash <span class="hljs-comment">--> [*]</span>
 </code></pre>
 <p>Praesent tellus mi, vulputate vel molestie nec, imperdiet vel quam. Vivamus elementum velit neque, eget varius risus placerat ac. Sed faucibus bibendum nulla. Sed pellentesque egestas velit. Nulla condimentum libero eget libero maximus facilisis. Suspendisse laoreet urna et turpis suscipit, in pretium nisl vehicula. Suspendisse quis condimentum mauris.</p>
 <h4>Heading 4</h4>
 <p>Sed luctus augue turpis, <code>in pulvinar erat molestie</code> non. Nulla leo ipsum, consequat a finibus in, aliquam ut elit. Nullam ut rutrum ipsum. Curabitur quis placerat nunc. Nullam feugiat erat ut mauris pulvinar aliquam. Integer tincidunt metus odio, vel sollicitudin odio tempus nec. Duis justo tortor, vestibulum a ultrices nec, semper non mi. Nullam quis ipsum non risus tempus ultrices. Praesent consectetur neque sit amet quam ullamcorper, id maximus felis suscipit. Sed ullamcorper purus varius, condimentum sapien ac, ultricies magna. Sed id elit tortor.</p>
-<pre><code class="language-js">/**
+<pre><code class="hljs language-js"><span class="hljs-comment">/**
  * Some description.
- */
-function foo(a, b) {
-  // An inline comment.
-  if (a != b) {
-    return 0;
+ */</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title hljs-function">foo</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-comment">// An inline comment.</span>
+  <span class="hljs-keyword">if</span> (a != b) {
+    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
   }
-  return 1;
+  <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;
 }
 </code></pre>
 <p>Curabitur gravida dignissim nisi, vel suscipit massa commodo a. Proin auctor tincidunt nunc, sed fermentum massa placerat sit amet. Suspendisse egestas ut lectus id tempor. Phasellus at commodo dolor. Nulla viverra, nibh porta egestas dapibus, mi lacus molestie ante, in finibus tortor risus vel massa.</p>
 <h5>Heading 5</h5>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat eget dui ac dapibus. Nulla accumsan felis quis laoreet vehicula.</p>
-<pre><code class="language-katex">\sum^{n}_{i=0} i
+<pre><code class="hljs language-css">\sum^{n}_{<span class="hljs-selector-tag">i</span>=<span class="hljs-number">0</span>} <span class="hljs-selector-tag">i</span>
 </code></pre>
-<p>Inline KaTeX <code>katex \sum^{n}_{i=0} \mathbb{K}(i)</code>. Curabitur pulvinar egestas dolor nec congue. Integer aliquet mauris non semper volutpat. Mauris hendrerit mattis egestas. Donec mattis orci vel libero auctor malesuada. Aliquam id vehicula magna. Duis placerat sit amet velit et rhoncus. Praesent quis dui vitae risus dapibus pellentesque eget et quam. Praesent ornare volutpat dignissim. Aenean ac massa ultricies mauris imperdiet lobortis a in orci.</p>
+<p>Inline KaTeX <code>\sum^{n}_{i=0} \mathbb{K}(i)</code>. Curabitur pulvinar egestas dolor nec congue. Integer aliquet mauris non semper volutpat. Mauris hendrerit mattis egestas. Donec mattis orci vel libero auctor malesuada. Aliquam id vehicula magna. Duis placerat sit amet velit et rhoncus. Praesent quis dui vitae risus dapibus pellentesque eget et quam. Praesent ornare volutpat dignissim. Aenean ac massa ultricies mauris imperdiet lobortis a in orci.</p>
 <table>
 <thead>
 <tr>

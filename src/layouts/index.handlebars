@@ -28,18 +28,29 @@
         <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
       </nav>
     </header>
-    <main class="container">
-    {{#pages}}
-      <a href="{{path}}" class="article-teaser">
-        <div class="article-teaser-info">
-          <span>{{formatDate matter.date "MMM d|',' yyyy"}}</span>
-          <span>⸰</span>
-          <span>{{readTime.text}}</span>
-        </div>
-        <div class="article-teaser-title">{{matter.title}}</div>
-        <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
-      </a>
-    {{/pages}}
+    <main>
+      <section class="container">
+        {{#pages}}
+        <a href="{{path}}" class="article-teaser">
+          <div class="article-teaser-info text-center">
+            <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
+            <span>⸰</span>
+            <span>{{readTime.text}}</span>
+          </div>
+          <div class="article-teaser-title text-center">{{matter.title}}</div>
+          {{!-- <h4 class="text-center">{{matter.title}}</h4> --}}
+          <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
+        </a>
+      {{/pages}}
+      </section>
     </main>
+    <footer>
+      <div class="container">
+        <div class="flex justify-between">
+          <span>Built with Hiro &amp; Skeleton</span>
+          <span>Ⓒ 2021 Mathias Hörtnagl</span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

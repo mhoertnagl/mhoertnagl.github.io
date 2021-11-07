@@ -27,34 +27,44 @@
         <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
       </nav>
     </header>
-    <main class="container">
-      <a href="content\test.html" class="article-teaser">
-        <div class="article-teaser-info">
-          <span>Oct 21</span>
-          <span>⸰</span>
-          <span>5 min read</span>
-        </div>
-        <div class="article-teaser-title">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-        <p class="article-teaser-synopsis">Phasellus sapien lacus, auctor ac est a, faucibus sollicitudin odio. Vestibulum ac quam dui. Nunc quis blandit dolor, fermentum euismod nibh. Fusce molestie ac metus rhoncus eleifend.</p>
-      </a>
-      <a href="content\foo\test2.html" class="article-teaser">
-        <div class="article-teaser-info">
-          <span>Oct 26</span>
-          <span>⸰</span>
-          <span>1 min read</span>
-        </div>
-        <div class="article-teaser-title">Test 2</div>
-        <p class="article-teaser-synopsis">This is Test 2.</p>
-      </a>
-      <a href="content\foo\test3.html" class="article-teaser">
-        <div class="article-teaser-info">
-          <span>Oct 29</span>
-          <span>⸰</span>
-          <span>1 min read</span>
-        </div>
-        <div class="article-teaser-title">Test 3</div>
-        <p class="article-teaser-synopsis">This is Test 3.</p>
-      </a>
+    <main>
+      <section class="container">
+        <a href="content\foo\test3.html" class="article-teaser">
+          <div class="article-teaser-info text-center">
+            <span>October 29</span>
+            <span>⸰</span>
+            <span>1 min read</span>
+          </div>
+          <div class="article-teaser-title text-center">Test 3</div>
+          <p class="article-teaser-synopsis">Seriously, this is a static site. You could just run gridsome build and then upload the entire dist folder to any web host. Deploy to Netlify 🔥 Simply connect Netlify to your GitHub repo and trigger</p>
+        </a>
+        <a href="content\foo\test2.html" class="article-teaser">
+          <div class="article-teaser-info text-center">
+            <span>October 26</span>
+            <span>⸰</span>
+            <span>1 min read</span>
+          </div>
+          <div class="article-teaser-title text-center">Test 2</div>
+          <p class="article-teaser-synopsis">Just like with tags, you can also organise your posts by author. Simply add an author: some-name to your posts&#x27; Front Matter, and the author collection and URLs will be automatically generated.</p>
+        </a>
+        <a href="content\test.html" class="article-teaser">
+          <div class="article-teaser-info text-center">
+            <span>October 21</span>
+            <span>⸰</span>
+            <span>5 min read</span>
+          </div>
+          <div class="article-teaser-title text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+          <p class="article-teaser-synopsis">Phasellus sapien lacus, auctor ac est a, faucibus sollicitudin odio. Vestibulum ac quam dui. Nunc quis blandit dolor, fermentum euismod nibh. Fusce molestie ac metus rhoncus eleifend.</p>
+        </a>
+      </section>
     </main>
+    <footer>
+      <div class="container">
+        <div class="flex justify-between">
+          <span>Built with Hiro &amp; Skeleton</span>
+          <span>Ⓒ 2021 Mathias Hörtnagl</span>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

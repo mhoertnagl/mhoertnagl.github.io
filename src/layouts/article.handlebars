@@ -42,15 +42,25 @@
       </nav>
     </header>
     <div id="article-progess"></div>
-    <main class="container">
-      <h1>{{matter.title}}</h1>
-      <div class="article-info">
-          <span>{{formatDate matter.date "MMM d|',' yyyy"}}</span>
-          <span>⸰</span>
-          <span>{{readTime.text}}</span>
-      </div>
-      <article>{{{content}}}</article>
+    <main>
+      <section class="container">
+        <div class="article-info">
+            <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
+            <span>⸰</span>
+            <span>{{readTime.text}}</span>
+        </div>
+        <h1 class="text-center">{{matter.title}}</h1>
+        <article>{{{content}}}</article>
+      </section>
     </main>
+    <footer>
+      <div class="container">
+        <div class="flex justify-between">
+          <span>Built with Hiro &amp; Skeleton</span>
+          <span>Ⓒ 2021 Mathias Hörtnagl</span>
+        </div>
+      </div>
+    </footer>
     <script type="text/javascript" src="/js/scroll.js"></script>
   </body>
 </html>

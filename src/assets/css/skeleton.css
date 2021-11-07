@@ -593,6 +593,7 @@ hr {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: var(--white-2);
+  border-radius: 6px;
 }
 
 /* Handle on hover */

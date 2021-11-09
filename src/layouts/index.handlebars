@@ -3,8 +3,8 @@
     <meta charset="UTF-8" />
     {{! <link rel="icon" href="/favicon.ico" /> }}
     <title>Dörtis Blog</title>
-    <meta name="description" content="Dörtis Blog">
-    <meta name="robots" content="index, follow">
+    <meta name="description" content="Dörtis Blog" />
+    <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="canonical" href="https://mhoertnagl.github.io/" />
     <link
@@ -30,18 +30,17 @@
     </header>
     <main>
       <section class="container">
-        {{#pages}}
-        <a href="{{path}}" class="article-teaser">
-          <div class="article-teaser-info text-center">
-            <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
-            <span>⸰</span>
-            <span>{{readTime.text}}</span>
-          </div>
-          <div class="article-teaser-title text-center">{{matter.title}}</div>
-          {{!-- <h4 class="text-center">{{matter.title}}</h4> --}}
-          <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
-        </a>
-      {{/pages}}
+        {{#each (orderBy pages "matter.date" "desc")}}
+          <a href="{{path}}" class="article-teaser">
+            <div class="article-teaser-info text-center">
+              <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
+              <span>⸰</span>
+              <span>{{readTime.text}}</span>
+            </div>
+            <div class="article-teaser-title text-center">{{matter.title}}</div>
+            <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
+          </a>
+        {{/each}}
       </section>
     </main>
     <footer>

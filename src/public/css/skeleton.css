@@ -222,7 +222,7 @@ h4,
 #footnote-label,
 h5,
 h6 {
-  margin-bottom: 2rem;
+  margin-bottom: 1.6rem;
   text-transform: uppercase;
   font-weight: 600;
 }
@@ -247,19 +247,19 @@ h3 {
 h4,
 #footnote-label {
   margin-top: 4rem;
-  font-size: 2rem;
+  font-size: 2.2rem;
   line-height: 1.35;
   letter-spacing: 0.1rem;
 }
 h5 {
   margin-top: 3.75rem;
-  font-size: 1.7rem;
+  font-size: 2rem;
   line-height: 1.5;
   letter-spacing: 0.15rem;
 }
 h6 {
   margin-top: 3.5rem;
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   line-height: 1.6;
   letter-spacing: 0.2rem;
 }
@@ -277,13 +277,13 @@ h6 {
   }
   h4,
   #footnote-label {
-    font-size: 2.5rem;
+    font-size: 2.6rem;
   }
   h5 {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   h6 {
-    font-size: 1.4rem;
+    font-size: 1.8rem;
   }
 }
 
@@ -312,7 +312,6 @@ header .header-blog-name {
   position: fixed;
   top: 44px;
   height: 1px;
-  /* width: 0; */
   transition: width 0.3s ease;
   background: var(--link-color-hover);
   z-index: 2;
@@ -358,20 +357,19 @@ footer {
   font-size: 85%;
 }
 
-/* .article-teaser .article-teaser-synopsis {
-  margin: 1rem 0 0;
-} */
-
 /* Articles
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+article > p {
+  font-size: 1.8rem;
+}
+
 article > p:first-of-type {
-  font-size: 133%;
+  font-size: 2rem;
 }
 
 .article-info {
   color: var(--white-3);
   text-align: center;
-  /* margin-top: 3rem; */
 }
 
 p {

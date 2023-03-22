@@ -8,7 +8,7 @@
   "scripts": {
     "minify:css:katex": "npx postcss assets/css/katex.css > public/css/katex.css",
     "minify:css": "npx postcss assets/css/skeleton.css > public/css/skeleton.css",
-    "dev": "concurrently \"yarn watch\" \"yarn serve\"",
+    "dev": "concurrently \"pnpm watch\" \"pnpm serve\"",
     "watch": "hiro build -w",
     "build": "hiro build",
     "serve": "http-server ../docs"

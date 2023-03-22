@@ -1,0 +1,361 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>µ Unit - A unit testing framework for C</title>
+  <meta name="description" content="I recently came across an article that implemented a minimalist unit testing framework for C. I was working on some C project and in need of a unit testing framework myself. Inspired by this apparent simplicity, I ventured to implement a testing framework of my own.">
+  <meta name="robots" content="index, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://mhoertnagl.github.io/" />
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="/css/katex.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" />
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" />
+    <link rel="stylesheet" type="text/css" href="/css/katex.css" />
+  </noscript>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
+    </nav>
+  </header>
+  <div id="article-progess"></div>
+  <main>
+    <section class="container">
+      <div class="article-info">
+        <span>March 22</span>
+        <span>⸰</span>
+        <span>7 min read</span>
+      </div>
+      <h1 class="text-center">µ Unit - A unit testing framework for C</h1>
+      <article><p>I recently came across <a href="https://jera.com/techinfo/jtns/jtn002">this</a> interesting article that implemented a minimalist unit testing framework for C. I was working on some C projects myself and in need of a unit testing framework. Inspired by this apparent simplicity, I ventured to implement a testing framework of my own.</p>
+<h2>mu.h</h2>
+<p>The unit testing framework should be minimalist but provide a convenient DSL and readable testing results on the console. Leveraging the power of C macros, the entire framework can be defined in a single header file <code>mh.h</code>. The entire file is rather short and presented here in its entirety.</p>
+<pre><code class="hljs language-c"><span class="hljs-comment">// mu.h - Minimalist unit testing framework.</span>
+<span class="hljs-comment">// Copyright (C) 2023  Mathias Hörtnagl &#x3C;mathias.hoertnagl[ÄT]gmail.com></span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// This program is free software: you can redistribute it and/or modify</span>
+<span class="hljs-comment">// it under the terms of the GNU General Public License as published by</span>
+<span class="hljs-comment">// the Free Software Foundation, either version 3 of the License, or</span>
+<span class="hljs-comment">// (at your option) any later version.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// This program is distributed in the hope that it will be useful,</span>
+<span class="hljs-comment">// but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="hljs-comment">// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="hljs-comment">// GNU General Public License for more details.</span>
+<span class="hljs-comment">//</span>
+<span class="hljs-comment">// You should have received a copy of the GNU General Public License</span>
+<span class="hljs-comment">// along with this program.  If not, see &#x3C;https://www.gnu.org/licenses/>.</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">ifndef</span> MU_H</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> MU_H</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&#x3C;stdio.h></span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&#x3C;string.h></span></span>
+
+<span class="hljs-comment">// clang-format off</span>
+
+<span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>
+{</span>
+  <span class="hljs-type">int</span> tests_run;
+  <span class="hljs-type">int</span> tests_failed;
+} Mu;
+
+<span class="hljs-comment">/**
+ * Defines a standalone unit test program.
+ * 
+ * @param body The body block containing 
+ *             the unit tests. 
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> mu_unit(body)                                                        \
+int main()                                                                   \
+{                                                                            \
+  Mu __mu__ = {                                                              \
+    .tests_run    = 0,                                                       \
+    .tests_failed = 0                                                        \
+  };                                                                         \
+  printf(<span class="hljs-string">"\n═══════════════════════════════════════════════════════════\n"</span>); \
+  printf(<span class="hljs-string">" µ Unit v1.2\n"</span>);                                                  \
+  printf(<span class="hljs-string">"───────────────────────────────────────────────────────────\n"</span>);   \
+  printf(<span class="hljs-string">" Running file %s\n\n"</span>, __FILE__);                                  \
+  body                                                                       \
+  printf(<span class="hljs-string">"───────────────────────────────────────────────────────────\n"</span>);   \
+  <span class="hljs-keyword">if</span> (__mu__.tests_failed == 0) {                                            \
+    printf(                                                                  \
+      <span class="hljs-string">" PASSED %d TESTS\n"</span>,                                                  \
+      __mu__.tests_run                                                       \
+    );                                                                       \
+  } <span class="hljs-keyword">else</span> {                                                                   \
+    printf(                                                                  \
+      <span class="hljs-string">" FAILED %d of %d TESTS\n"</span>,                                            \
+      __mu__.tests_failed,                                                   \
+      __mu__.tests_run                                                       \
+    );                                                                       \
+  }                                                                          \
+  printf(<span class="hljs-string">"═══════════════════════════════════════════════════════════\n\n"</span>); \
+  return 0;                                                                  \
+}</span>
+
+<span class="hljs-comment">/**
+ * Defines a single unit test.
+ * 
+ * @param name The name of the unit test.
+ * @param body The test function body block. 
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> test(name, body)        \
+  {                             \
+    int fails = 0;              \
+    printf(<span class="hljs-string">" ▶ %s\n"</span>, name);    \
+    body                        \
+    <span class="hljs-keyword">if</span> (fails == 0) {           \
+      printf(<span class="hljs-string">"   🗹  OK\n\n"</span>);  \
+    } <span class="hljs-keyword">else</span> {                    \
+      printf(<span class="hljs-string">"   ⬜ FAIL\n\n"</span>); \
+    }                           \
+    __mu__.tests_run++;         \
+  }                </span>
+
+<span class="hljs-comment">/**
+ * Asserts that the test condition is true or prints the 
+ * failing message if the condition is not satisfied.
+ * 
+ * @param test     The test condition.
+ * @param __format The failing message template.
+ * @param args     Optional template arguments.
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> assert(test, __format, args...)                 \
+  <span class="hljs-keyword">if</span> (!(test)) {                                        \
+    <span class="hljs-keyword">if</span> (fails == 0) {                                   \
+      __mu__.tests_failed++;                            \
+    }                                                   \
+    printf(<span class="hljs-string">"    ▸ %d: "</span>__format<span class="hljs-string">"\n"</span>, __LINE__, ##args); \
+    fails++;                                            \
+  }</span>
+
+<span class="hljs-comment">/**
+ * Asserts that the actual string is equal 
+ * to the expected string or prints a fixed
+ * message indicating the mismatch.
+ * 
+ * @param act The actual string.
+ * @param exp The expected string.
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> assert_str_equal(act, exp)       \
+  assert(                                \
+    !strcmp(exp, act),                   \
+    <span class="hljs-string">"Expected string [%s] but got [%s]"</span>, \
+    exp,                                 \
+    act                                  \
+  )</span>
+
+<span class="hljs-comment">// clang-format on</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">endif</span></span>
+</code></pre>
+<p>Every µ unit test comprises three building blocks: <code>mu_unit</code>, <code>test</code> and <code>assert*</code>. <code>mu_unit</code> is a wrapper for each test file. Every independent test file contains only one <code>mu_unit</code> block which itself contains a arbitrary number of <code>test</code> blocks. Each <code>test</code> block then contains the testing logic and one ore more <code>assert*</code> statements.</p>
+<h2>An example test file</h2>
+<p>The following test file is part of my <code>mnml-as</code> project and tests some aspects of the assembler symbol table. As a convention test files end in <code>*.test.c</code>. Every test is identified by a user defined descriptive string as championed in BDD.</p>
+<pre><code class="hljs language-c"><span class="hljs-comment">// test/sym.test.c</span>
+
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"utils/mu.h"</span></span>
+<span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">"../src/sym/sym.h"</span></span>
+
+mu_unit({
+  test(<span class="hljs-string">"A new symbol table should be empty"</span>, {
+    SymbolTable *table = new_symbol_table();
+    assert(table->size == <span class="hljs-number">0</span>, <span class="hljs-string">"table size should be 0"</span>);
+    free_symbol_table(table);
+  });
+
+  test(<span class="hljs-string">"Adding a symbol should increase table size by one"</span>, {
+    SymbolTable *table = new_symbol_table();
+    add_symbol(table, <span class="hljs-string">"x"</span>, <span class="hljs-number">42</span>);
+    assert(table->size == <span class="hljs-number">1</span>, <span class="hljs-string">"table size should be 1"</span>);
+    free_symbol_table(table);
+  });
+
+  test(<span class="hljs-string">"An added a symbol should be stored in the table"</span>, {
+    SymbolTable *table = new_symbol_table();
+    add_symbol(table, <span class="hljs-string">"x"</span>, <span class="hljs-number">42</span>);
+    Symbol *sym = table->symbols[<span class="hljs-number">0</span>];
+    assert_str_equal(sym->name, <span class="hljs-string">"x"</span>);
+    assert(sym->loc == <span class="hljs-number">42</span>, <span class="hljs-string">"location of first symbol should be 42"</span>);
+    free_symbol_table(table);
+  });
+
+  test(<span class="hljs-string">"An added symbol should be findable again"</span>, {
+    SymbolTable *table = new_symbol_table();
+    add_symbol(table, <span class="hljs-string">"x"</span>, <span class="hljs-number">42</span>);
+    i32 loc = find_symbol(table, <span class="hljs-string">"x"</span>);
+    assert(loc == <span class="hljs-number">42</span>, <span class="hljs-string">"'x' should have location 42"</span>);
+    free_symbol_table(table);
+  });
+
+  test(<span class="hljs-string">"Multiple added symbol should be findable again"</span>, {
+    SymbolTable *table = new_symbol_table();
+    add_symbol(table, <span class="hljs-string">"x0"</span>, <span class="hljs-number">42</span>);
+    add_symbol(table, <span class="hljs-string">"x1"</span>, <span class="hljs-number">43</span>);
+    add_symbol(table, <span class="hljs-string">"x2"</span>, <span class="hljs-number">44</span>);
+    i32 loc2 = find_symbol(table, <span class="hljs-string">"x2"</span>);
+    i32 loc0 = find_symbol(table, <span class="hljs-string">"x0"</span>);
+    i32 loc1 = find_symbol(table, <span class="hljs-string">"x1"</span>);
+    assert(loc2 == <span class="hljs-number">44</span>, <span class="hljs-string">"'x2' should have location 44"</span>);
+    assert(loc1 == <span class="hljs-number">43</span>, <span class="hljs-string">"'x1' should have location 43"</span>);
+    assert(loc0 == <span class="hljs-number">42</span>, <span class="hljs-string">"'x0' should have location 42"</span>);
+    free_symbol_table(table);
+  });
+
+  test(<span class="hljs-string">"A not added symbol should not be findable"</span>, {
+    SymbolTable *table = new_symbol_table();
+    add_symbol(table, <span class="hljs-string">"x"</span>, <span class="hljs-number">42</span>);
+    i32 loc = find_symbol(table, <span class="hljs-string">"y"</span>);
+    assert(loc == <span class="hljs-number">-1</span>, <span class="hljs-string">"'y' should not be in the table"</span>);
+    free_symbol_table(table);
+  });
+})
+</code></pre>
+<p>Of course the user can define as many unit test files as desired.</p>
+<h2>Running the tests</h2>
+<p>With some additional Makefile magic, we can run the tests with a single command. The example Makefile again taken from <code>mnml-as</code> collects all object files into a single build directory. Besides the main executable it generates an executable for each test file and executes them immediately.</p>
+<pre><code class="hljs language-makefile">CC = clang
+CFLAGS = -std=c17 -g -Wall
+
+<span class="hljs-comment"># Binary</span>
+<span class="hljs-comment">#------------------------------------------------------------------------------</span>
+<span class="hljs-comment"># Binary target name.</span>
+TARGET = mnml-as
+
+<span class="hljs-comment"># Binary source root directory.</span>
+SRC_DIR = ./src
+<span class="hljs-comment"># Binary build root directory.</span>
+OUT_DIR = ./build
+<span class="hljs-comment"># Subdirectory for all source object files.</span>
+OBJ_DIR = <span class="hljs-variable">$(OUT_DIR)</span>/obj
+
+<span class="hljs-comment"># Binary source library dependencies.</span>
+LIBS +=
+<span class="hljs-comment"># Binary source header file dependencies.</span>
+DEPS += -I<span class="hljs-variable">$(SRC_DIR)</span>
+
+<span class="hljs-comment"># Unit testing</span>
+<span class="hljs-comment">#------------------------------------------------------------------------------</span>
+<span class="hljs-comment"># Unit tests source root directory.</span>
+TST_SRC_DIR = ./test
+<span class="hljs-comment"># Unit tests build root directory.</span>
+TST_OUT_DIR = ./build/tests
+<span class="hljs-comment"># Subdirectory for all unit test object files.</span>
+TST_OBJ_DIR = <span class="hljs-variable">$(TST_OUT_DIR)</span>/obj
+
+<span class="hljs-comment"># Unit tests library dependencies.</span>
+TST_LIBS +=
+<span class="hljs-comment"># Unit tests header file dependencies.</span>
+TST_DEPS += -I<span class="hljs-variable">$(TST_SRC_DIR)</span>
+
+<span class="hljs-comment">#------------------------------------------------------------------------------</span>
+<span class="hljs-comment"># DO NOT EDIT BELOW THIS LINE</span>
+<span class="hljs-comment">#------------------------------------------------------------------------------</span>
+INC = <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find <span class="hljs-variable">$(SRC_DIR)</span> -name '*.h')</span>
+SRC = <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find <span class="hljs-variable">$(SRC_DIR)</span> -name '*.c')</span>
+OBJ = <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(SRC_DIR)</span>/%, <span class="hljs-variable">$(OBJ_DIR)</span>/%, $(SRC:.c=.o)</span>)
+
+TST_INC = <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find <span class="hljs-variable">$(TST_SRC_DIR)</span> -name '*.h')</span>
+TST_SRC = <span class="hljs-variable">$(<span class="hljs-built_in">shell</span> find <span class="hljs-variable">$(TST_SRC_DIR)</span> -name '*.c')</span>
+<span class="hljs-comment"># Exclude binary main object file.</span>
+NMM_OBJ = <span class="hljs-variable">$(<span class="hljs-built_in">filter</span>-out %main.o, <span class="hljs-variable">$(OBJ)</span>)</span> 
+TST_OBJ = <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(TST_SRC_DIR)</span>/%, <span class="hljs-variable">$(TST_OBJ_DIR)</span>/%, $(TST_SRC:.c=.o)</span>)
+<span class="hljs-comment"># Exclude unit test main object files.</span>
+NMM_TST_OBJ = <span class="hljs-variable">$(<span class="hljs-built_in">filter</span>-out %.test.o, <span class="hljs-variable">$(TST_OBJ)</span>)</span> 
+<span class="hljs-comment"># Gather all unit test files. </span>
+<span class="hljs-comment"># All files with *.test.c are considered unit test files.</span>
+TST_TARGETS = <span class="hljs-variable">$(<span class="hljs-built_in">patsubst</span> <span class="hljs-variable">$(TST_SRC_DIR)</span>/%.test.c, <span class="hljs-variable">$(TST_OUT_DIR)</span>/%.test, <span class="hljs-variable">$(TST_SRC)</span>)</span>
+
+<span class="hljs-comment"># Creates the binary.</span>
+<span class="hljs-section">all: <span class="hljs-variable">$(TARGET)</span></span>
+
+<span class="hljs-comment"># Cleans the build directory then rebuilds the binary.</span>
+<span class="hljs-section">remake: clean all</span>
+
+<span class="hljs-variable">$(TARGET)</span>: <span class="hljs-variable">$(OBJ)</span>
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(LIBS)</span> <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$(OUT_DIR)</span>/<span class="hljs-variable">$@</span>
+
+<span class="hljs-variable">$(OBJ_DIR)</span>/%.o: <span class="hljs-variable">$(SRC_DIR)</span>/%.c <span class="hljs-variable">$(INC)</span> 
+	@mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span>
+	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(LIBS)</span> <span class="hljs-variable">$(DEPS)</span> <span class="hljs-variable">$&#x3C;</span> -o <span class="hljs-variable">$@</span>
+
+<span class="hljs-comment"># Run all unit tests.</span>
+<span class="hljs-section">test: clean <span class="hljs-variable">$(TST_TARGETS)</span></span>
+
+<span class="hljs-variable">$(TST_OUT_DIR)</span>/%.test: <span class="hljs-variable">$(NMM_OBJ)</span> <span class="hljs-variable">$(NMM_TST_OBJ)</span> <span class="hljs-variable">$(TST_OBJ_DIR)</span>/%.test.o
+	<span class="hljs-variable">$(CC)</span> <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(LIBS)</span> <span class="hljs-variable">$(TST_LIBS)</span> <span class="hljs-variable">$^</span> -o <span class="hljs-variable">$@</span>
+	<span class="hljs-variable">$@</span>
+
+<span class="hljs-variable">$(TST_OBJ_DIR)</span>/%.o: <span class="hljs-variable">$(TST_SRC_DIR)</span>/%.c <span class="hljs-variable">$(INC)</span> <span class="hljs-variable">$(TST_INC)</span>
+	@mkdir -p <span class="hljs-variable">$(<span class="hljs-built_in">dir</span> <span class="hljs-variable">$@</span>)</span>
+	<span class="hljs-variable">$(CC)</span> -c <span class="hljs-variable">$(CFLAGS)</span> <span class="hljs-variable">$(LIBS)</span> <span class="hljs-variable">$(TST_LIBS)</span> <span class="hljs-variable">$(DEPS)</span> <span class="hljs-variable">$(TST_DEPS)</span> <span class="hljs-variable">$&#x3C;</span> -o <span class="hljs-variable">$@</span>
+
+<span class="hljs-comment"># Full clean. </span>
+<span class="hljs-comment"># Removes the build directory.</span>
+<span class="hljs-section">clean:</span>
+	@rm -rf <span class="hljs-variable">$(OUT_DIR)</span>
+
+<span class="hljs-meta"><span class="hljs-keyword">.PHONY</span>: clean</span>
+</code></pre>
+<h2>The result</h2>
+<p>I put considerable effort into the actual test results output. It lists all tests in order of definition. There is no randomization of the execution order. Every failed assertion prints the line number and the corresponding message.</p>
+<pre><code class="hljs language-sh">make <span class="hljs-built_in">test</span>
+...
+
+═══════════════════════════════════════════════════════════
+ µ Unit v1.2
+───────────────────────────────────────────────────────────
+ Running file <span class="hljs-built_in">test</span>/sym.test.c
+
+ ▶ A new symbol table should be empty
+   🗹 OK
+
+ ▶ Adding a symbol should increase table size by one
+   🗹 OK
+
+ ▶ An added a symbol should be stored <span class="hljs-keyword">in</span> the table
+    ▸ 22: Expected string [y] but got [x]
+    ▸ 23: location of first symbol should be 42
+   ⬜ FAIL
+
+ ▶ An added symbol should be findable again
+   🗹 OK
+
+ ▶ Multiple added symbol should be findable again
+    ▸ 45: <span class="hljs-string">'x0'</span> should have location 42
+   ⬜ FAIL
+
+ ▶ A not added symbol should not be findable
+   🗹 OK
+
+───────────────────────────────────────────────────────────
+ FAILED 2 of 6 TESTS
+═══════════════════════════════════════════════════════════
+</code></pre>
+<p>Sweet!</p></article>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="flex justify-between">
+        <span>Built with Hiro &amp; Skeleton</span>
+        <span>Ⓒ 2021 Mathias Hörtnagl</span>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="/js/scroll.js"></script>
+</body>
+
+</html>

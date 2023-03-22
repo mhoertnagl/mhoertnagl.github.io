@@ -1,70 +1,74 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Dörtis Blog</title>
-    <meta name="description" content="Dörtis Blog" />
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://mhoertnagl.github.io/" />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        href="//fonts.googleapis.com/css?family=Raleway:300,400,600"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </noscript>
-    <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="container">
-        <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
-      </nav>
-    </header>
-    <main>
-      <section class="container">
-          <a href="content\foo\test3.html" class="article-teaser">
-            <div class="article-teaser-info text-center">
-              <span>October 29</span>
-              <span>⸰</span>
-              <span>1 min read</span>
-            </div>
-            <div class="article-teaser-title text-center">Test 3</div>
-            <p class="article-teaser-synopsis">Seriously, this is a static site. You could just run gridsome build and then upload the entire dist folder to any web host. Deploy to Netlify 🔥 Simply connect Netlify to your GitHub repo and trigger</p>
-          </a>
-          <a href="content\foo\test2.html" class="article-teaser">
-            <div class="article-teaser-info text-center">
-              <span>October 26</span>
-              <span>⸰</span>
-              <span>1 min read</span>
-            </div>
-            <div class="article-teaser-title text-center">Test 2</div>
-            <p class="article-teaser-synopsis">Just like with tags, you can also organise your posts by author. Simply add an author: some-name to your posts&#x27; Front Matter, and the author collection and URLs will be automatically generated.</p>
-          </a>
-          <a href="content\foo\test.html" class="article-teaser">
-            <div class="article-teaser-info text-center">
-              <span>October 21</span>
-              <span>⸰</span>
-              <span>5 min read</span>
-            </div>
-            <div class="article-teaser-title text-center">Lorem lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-            <p class="article-teaser-synopsis">Phasellus sapien lacus, auctor ac est a, faucibus sollicitudin odio. Vestibulum ac quam dui. Nunc quis blandit dolor, fermentum euismod nibh. Fusce molestie ac metus rhoncus eleifend.</p>
-          </a>
-      </section>
-    </main>
-    <footer>
-      <div class="container">
-        <div class="flex justify-between">
-          <span>Built with Hiro &amp; Skeleton</span>
-          <span>Ⓒ 2021 Mathias Hörtnagl</span>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Dörtis Blog</title>
+  <meta name="description" content="Dörtis Blog" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://mhoertnagl.github.io/" />
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="//fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css" />
+  </noscript>
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
+    </nav>
+  </header>
+  <main>
+    <section class="container">
+      <a href="content/2023/mu-unit.html" class="article-teaser">
+        <div class="article-teaser-info text-center">
+          <span>March 22</span>
+          <span>⸰</span>
+          <span>7 min read</span>
         </div>
+        <div class="article-teaser-title text-center">µ Unit - A unit testing framework for C</div>
+        <p class="article-teaser-synopsis">I recently came across an article that implemented a minimalist unit testing framework for C. I was working on some C project and in need of a unit testing framework myself. Inspired by this apparent simplicity, I ventured to implement a testing framework of my own.</p>
+      </a>
+      <a href="content/foo/test3.html" class="article-teaser">
+        <div class="article-teaser-info text-center">
+          <span>October 29, 2021</span>
+          <span>⸰</span>
+          <span>1 min read</span>
+        </div>
+        <div class="article-teaser-title text-center">Test 3</div>
+        <p class="article-teaser-synopsis">Seriously, this is a static site. You could just run gridsome build and then upload the entire dist folder to any web host. Deploy to Netlify 🔥 Simply connect Netlify to your GitHub repo and trigger</p>
+      </a>
+      <a href="content/foo/test2.html" class="article-teaser">
+        <div class="article-teaser-info text-center">
+          <span>October 26, 2021</span>
+          <span>⸰</span>
+          <span>1 min read</span>
+        </div>
+        <div class="article-teaser-title text-center">Test 2</div>
+        <p class="article-teaser-synopsis">Just like with tags, you can also organise your posts by author. Simply add an author: some-name to your posts&#x27; Front Matter, and the author collection and URLs will be automatically generated.</p>
+      </a>
+      <a href="content/foo/test.html" class="article-teaser">
+        <div class="article-teaser-info text-center">
+          <span>October 21, 2021</span>
+          <span>⸰</span>
+          <span>5 min read</span>
+        </div>
+        <div class="article-teaser-title text-center">Lorem lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+        <p class="article-teaser-synopsis">Phasellus sapien lacus, auctor ac est a, faucibus sollicitudin odio. Vestibulum ac quam dui. Nunc quis blandit dolor, fermentum euismod nibh. Fusce molestie ac metus rhoncus eleifend.</p>
+      </a>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="flex justify-between">
+        <span>Built with Hiro &amp; Skeleton</span>
+        <span>Ⓒ 2021-2023 Mathias Hörtnagl</span>
       </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+</body>
+
 </html>

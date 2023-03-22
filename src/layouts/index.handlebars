@@ -1,55 +1,51 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    {{! <link rel="icon" href="/favicon.ico" /> }}
-    <title>Dörtis Blog</title>
-    <meta name="description" content="Dörtis Blog" />
-    <meta name="robots" content="index, follow" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://mhoertnagl.github.io/" />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <noscript>
-      <link
-        href="//fonts.googleapis.com/css?family=Raleway:300,400,600"
-        rel="stylesheet"
-        type="text/css"
-      />
-    </noscript>
-    <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
-  </head>
-  <body>
-    <header>
-      <nav class="container">
-        <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
-      </nav>
-    </header>
-    <main>
-      <section class="container">
-        {{#each (orderBy pages "matter.date" "desc")}}
-          <a href="{{path}}" class="article-teaser">
-            <div class="article-teaser-info text-center">
-              <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
-              <span>⸰</span>
-              <span>{{readTime.text}}</span>
-            </div>
-            <div class="article-teaser-title text-center">{{matter.title}}</div>
-            <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
-          </a>
-        {{/each}}
-      </section>
-    </main>
-    <footer>
-      <div class="container">
-        <div class="flex justify-between">
-          <span>Built with Hiro &amp; Skeleton</span>
-          <span>Ⓒ 2021 Mathias Hörtnagl</span>
+
+<head>
+  <meta charset="UTF-8" />
+  {{!
+  <link rel="icon" href="/favicon.ico" /> }}
+  <title>Dörtis Blog</title>
+  <meta name="description" content="Dörtis Blog" />
+  <meta name="robots" content="index, follow" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://mhoertnagl.github.io/" />
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link href="//fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css" />
+  </noscript>
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
+    </nav>
+  </header>
+  <main>
+    <section class="container">
+      {{#each (orderBy pages "matter.date" "desc")}}
+      <a href="{{path}}" class="article-teaser">
+        <div class="article-teaser-info text-center">
+          <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
+          <span>⸰</span>
+          <span>{{readTime.text}}</span>
         </div>
+        <div class="article-teaser-title text-center">{{matter.title}}</div>
+        <p class="article-teaser-synopsis">{{matter.synopsis}}</p>
+      </a>
+      {{/each}}
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="flex justify-between">
+        <span>Built with Hiro &amp; Skeleton</span>
+        <span>Ⓒ 2021-2023 Mathias Hörtnagl</span>
       </div>
-    </footer>
-  </body>
+    </div>
+  </footer>
+</body>
+
 </html>

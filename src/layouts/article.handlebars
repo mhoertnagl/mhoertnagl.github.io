@@ -1,66 +1,56 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    {{! <link rel="icon" href="/favicon.ico" /> }}
-    <title>{{matter.title}}</title>
-    <meta name="description" content="{{matter.synopsis}}">
-    <meta name="robots" content="index, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="canonical" href="https://mhoertnagl.github.io/" />
-    <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <link
-      rel="preload"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"
-      as="style"
-      onload="this.onload=null;this.rel='stylesheet'"
-    />
-    <link rel="preload" href="/css/katex.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript>
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap"
-      />
-      <link
-        rel="stylesheet"
-        type="text/css"
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap"
-      />
-      <link rel="stylesheet" type="text/css" href="/css/katex.css" />
-    </noscript>
-  </head>
-  <body>
-    <header>
-      <nav class="container">
-        <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
-      </nav>
-    </header>
-    <div id="article-progess"></div>
-    <main>
-      <section class="container">
-        <div class="article-info">
-            <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
-            <span>⸰</span>
-            <span>{{readTime.text}}</span>
-        </div>
-        <h1 class="text-center">{{matter.title}}</h1>
-        <article>{{{content}}}</article>
-      </section>
-    </main>
-    <footer>
-      <div class="container">
-        <div class="flex justify-between">
-          <span>Built with Hiro &amp; Skeleton</span>
-          <span>Ⓒ 2021 Mathias Hörtnagl</span>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  {{!
+  <link rel="icon" href="/favicon.ico" /> }}
+  <title>{{matter.title}}</title>
+  <meta name="description" content="{{matter.synopsis}}">
+  <meta name="robots" content="index, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="canonical" href="https://mhoertnagl.github.io/" />
+  <link rel="stylesheet" type="text/css" href="/css/skeleton.css" />
+  <link rel="preload" href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload" href="/css/katex.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+  <noscript>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Raleway:300,400,600&display=swap" />
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" />
+    <link rel="stylesheet" type="text/css" href="/css/katex.css" />
+  </noscript>
+</head>
+
+<body>
+  <header>
+    <nav class="container">
+      <a href="/" class="header-blog-name" rel="nofollow">Dörtis Blog</a>
+    </nav>
+  </header>
+  <div id="article-progess"></div>
+  <main>
+    <section class="container">
+      <div class="article-info">
+        <span>{{formatDate matter.date "MMMM d|',' yyyy"}}</span>
+        <span>⸰</span>
+        <span>{{readTime.text}}</span>
       </div>
-    </footer>
-    <script type="text/javascript" src="/js/scroll.js"></script>
-  </body>
+      <h1 class="text-center">{{matter.title}}</h1>
+      <article>{{{content}}}</article>
+    </section>
+  </main>
+  <footer>
+    <div class="container">
+      <div class="flex justify-between">
+        <span>Built with Hiro &amp; Skeleton</span>
+        <span>Ⓒ 2021 Mathias Hörtnagl</span>
+      </div>
+    </div>
+  </footer>
+  <script type="text/javascript" src="/js/scroll.js"></script>
+</body>
+
 </html>

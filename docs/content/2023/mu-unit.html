@@ -34,7 +34,7 @@
       <div class="article-info">
         <span>March 22</span>
         <span>⸰</span>
-        <span>7 min read</span>
+        <span>8 min read</span>
       </div>
       <h1 class="text-center">µ Unit - A unit testing framework for C</h1>
       <article><p>I recently came across <a href="https://jera.com/techinfo/jtns/jtn002">this</a> interesting article that implemented a minimalist unit testing framework for C. I was working on some C projects myself and in need of a unit testing framework. Inspired by this apparent simplicity, I ventured to implement a testing framework of my own.</p>
@@ -84,7 +84,7 @@ int main()                                                                   \
     .tests_failed = 0                                                        \
   };                                                                         \
   printf(<span class="hljs-string">"\n═══════════════════════════════════════════════════════════\n"</span>); \
-  printf(<span class="hljs-string">" µ Unit v1.2\n"</span>);                                                  \
+  printf(<span class="hljs-string">" µ Unit v1.3\n"</span>);                                                  \
   printf(<span class="hljs-string">"───────────────────────────────────────────────────────────\n"</span>);   \
   printf(<span class="hljs-string">" Running file %s\n\n"</span>, __FILE__);                                  \
   body                                                                       \
@@ -125,6 +125,21 @@ int main()                                                                   \
   }                </span>
 
 <span class="hljs-comment">/**
+ * Fails and prints the failing message. 
+ * 
+ * @param __format The failing message template.
+ * @param args     Optional template arguments.
+ */</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> fail(__format, args...)                         \
+  {                                                     \
+    <span class="hljs-keyword">if</span> (fails == 0) {                                   \
+      __mu__.tests_failed++;                            \
+    }                                                   \
+    printf(<span class="hljs-string">"    ▸ %d: "</span>__format<span class="hljs-string">"\n"</span>, __LINE__, ##args); \
+    fails++;                                            \
+  }</span>
+
+<span class="hljs-comment">/**
  * Asserts that the test condition is true or prints the 
  * failing message if the condition is not satisfied.
  * 
@@ -132,14 +147,8 @@ int main()                                                                   \
  * @param __format The failing message template.
  * @param args     Optional template arguments.
  */</span>
-<span class="hljs-meta">#<span class="hljs-keyword">define</span> assert(test, __format, args...)                 \
-  <span class="hljs-keyword">if</span> (!(test)) {                                        \
-    <span class="hljs-keyword">if</span> (fails == 0) {                                   \
-      __mu__.tests_failed++;                            \
-    }                                                   \
-    printf(<span class="hljs-string">"    ▸ %d: "</span>__format<span class="hljs-string">"\n"</span>, __LINE__, ##args); \
-    fails++;                                            \
-  }</span>
+<span class="hljs-meta">#<span class="hljs-keyword">define</span> assert(test, __format, args...) \
+  <span class="hljs-keyword">if</span> (!(test)) fail(__format, ##args)</span>
 
 <span class="hljs-comment">/**
  * Asserts that the actual string is equal 

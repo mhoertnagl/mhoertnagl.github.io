@@ -34,7 +34,7 @@
       <div class="article-info">
         <span>April 6</span>
         <span>⸰</span>
-        <span>5 min read</span>
+        <span>6 min read</span>
       </div>
       <h1 class="text-center">mnml - An Educational Minimal Computing System</h1>
       <article><p>There is something magical about computing. Implementing an educational computing system from scratch provides ample opportunity to dabble in design minimalism. mnml is a virtual stack machine plus an assembler stripped to the bones.</p>
@@ -45,36 +45,52 @@
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>psh</td>
+<td>psh n</td>
+<td>..</td>
+<td>n ..</td>
 <td>Push the next two bytes in the binary onto the stack.</td>
 </tr>
 <tr>
 <td>pop</td>
+<td>x ..</td>
+<td></td>
 <td>Removes the top element from the stack.</td>
 </tr>
 <tr>
 <td>nip</td>
+<td>x y ..</td>
+<td>x ..</td>
 <td>Removes the second element from the stack.</td>
 </tr>
 <tr>
 <td>dup</td>
+<td>x ..</td>
+<td>x x ..</td>
 <td>Push a copy of the first element onto the stack.</td>
 </tr>
 <tr>
 <td>ovr</td>
+<td>x y ..</td>
+<td>y x y ..</td>
 <td>Push a copy of the second element onto the stack.</td>
 </tr>
 <tr>
 <td>swp</td>
+<td>x y ..</td>
+<td>y x ..</td>
 <td>Swap the first and the second element.</td>
 </tr>
 <tr>
 <td>rot</td>
+<td>x y z ..</td>
+<td>y z x ..</td>
 <td>Rotate the first three elements.</td>
 </tr>
 </tbody>
@@ -85,32 +101,46 @@
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>inc</td>
+<td>x ..</td>
+<td>(x+1) ..</td>
 <td>Increase the top element by one.</td>
 </tr>
 <tr>
 <td>dec</td>
+<td>x ..</td>
+<td>(x-1) ..</td>
 <td>Decrease the top element by one.</td>
 </tr>
 <tr>
 <td>add</td>
+<td>x y ..</td>
+<td>(y+x) ..</td>
 <td>Add the top two elements.</td>
 </tr>
 <tr>
 <td>sub</td>
+<td>x y ..</td>
+<td>(y-x) ..</td>
 <td>Subtract the first element from the second.</td>
 </tr>
 <tr>
 <td>mul</td>
+<td>x y ..</td>
+<td>(y*x) ..</td>
 <td>Multiply the top two elements.</td>
 </tr>
 <tr>
 <td>div</td>
+<td>x y ..</td>
+<td>(y/x) ..</td>
 <td>Divide the second element by the first.</td>
 </tr>
 </tbody>
@@ -121,37 +151,51 @@
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>not</td>
+<td>x ..</td>
+<td>!x ..</td>
 <td>Negate top stack element.</td>
 </tr>
 <tr>
 <td>and</td>
+<td>x y ..</td>
+<td>(y&#x26;x) ..</td>
 <td>Logical AND of the two topmost stack entries.</td>
 </tr>
 <tr>
 <td>oor</td>
+<td>x y ..</td>
+<td>(y|x) ..</td>
 <td>Logical OR of the two topmost stack entries.</td>
 </tr>
 <tr>
 <td>xor</td>
+<td>x y ..</td>
+<td>(y^x) ..</td>
 <td>Logical XOR of the two topmost stack entries.</td>
 </tr>
 <tr>
 <td>sll</td>
+<td>x y ..</td>
+<td>(y&#x3C;&#x3C;x) ..</td>
 <td>Logical left shift the second element by the number of bit specified by the first element.</td>
 </tr>
 <tr>
 <td>srl</td>
+<td>x y ..</td>
+<td>(y>>x) ..</td>
 <td>Logical right shift the second element by the number of bit specified by the first element.</td>
 </tr>
 </tbody>
 </table>
-<p><code>sll</code> and <code>srl</code> can be emulated with <code>mul</code> and <code>div</code>. Arithmetic shift is missing completely but again can be emulated with <code>div</code>. <code>xor</code> is actually a special case of <code>neq</code> which is one of the comparison operations:</p>
+<p><code>sll</code> and <code>srl</code> can be emulated with <code>mul</code> and <code>div</code>. Arithmetic shift is missing completely but again can be emulated with <code>div</code>.</p>
 <table>
 <thead>
 <tr>
@@ -191,44 +235,62 @@
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>jmp</td>
-<td>Unconditional jump to location is first element.</td>
+<td>a ..</td>
+<td>..</td>
+<td>Unconditional jump to location in first element <code>PC = a</code>.</td>
 </tr>
 <tr>
 <td>jal</td>
-<td>Unconditional jump to location is first element and push return address onto stack.</td>
+<td>a ..</td>
+<td>(PC+1) ..</td>
+<td>Unconditional jump to location in first element and push return address onto stack <code>PC = a</code>.</td>
 </tr>
 <tr>
 <td>bra</td>
-<td>Branch to location in second element if first element is 1.</td>
+<td>a c ..</td>
+<td>..</td>
+<td>Branch to location in second element if first element is 1 <code>if c == 1 then PC = a</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>Additionally there are two operations to load from and store to memory...</p>
+<h3>Memory</h3>
+<p>Additionally there are two operations to load from and store to memory.</p>
 <table>
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>ldw</td>
+<td>a ..</td>
+<td>MEM[a] ..</td>
 <td>Load 16bit word from memory onto the stack.</td>
 </tr>
 <tr>
 <td>stw</td>
-<td>Store 16bit word to memory.</td>
+<td>a v ..</td>
+<td>..</td>
+<td>Store 16bit word to memory <code>MEM[a] = b</code>.</td>
 </tr>
 </tbody>
 </table>
-<p>... as well as two operations to receive data from and transfer data to devices.</p>
+<p>Words are stored big-endian. At start-up the VM sets the program counter <code>PC = 0</code> and the stack pointer <code>SP</code> to the end of memory.</p>
+<h3>Devices</h3>
+<p>// Device concept</p>
+<p>Two operations to receive data from and transfer data to devices.</p>
 <table>
 <thead>
 <tr>
@@ -247,14 +309,14 @@
 </tr>
 </tbody>
 </table>
-<p>// Devices</p></article>
+<h2>Assembler</h2></article>
     </section>
   </main>
   <footer>
     <div class="container">
       <div class="flex justify-between">
         <span>Built with Hiro &amp; Skeleton</span>
-        <span>Ⓒ 2021 Mathias Hörtnagl</span>
+        <span>Ⓒ 2021-2023 Mathias Hörtnagl</span>
       </div>
     </div>
   </footer>

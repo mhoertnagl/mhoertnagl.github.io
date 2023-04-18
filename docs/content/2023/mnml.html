@@ -34,12 +34,12 @@
       <div class="article-info">
         <span>April 6</span>
         <span>⸰</span>
-        <span>6 min read</span>
+        <span>8 min read</span>
       </div>
       <h1 class="text-center">mnml - An Educational Minimal Computing System</h1>
       <article><p>There is something magical about computing. Implementing an educational computing system from scratch provides ample opportunity to dabble in design minimalism. mnml is a virtual stack machine plus an assembler stripped to the bones.</p>
 <h2>The Virtual Machine</h2>
-<p>mnml is a 16bit virtual stack machine with a whopping 64k of addressable memory. The instruction set is lavish and redundant but I will slim it down as soon as I gained some insights on the utility of each instruction. Of course <code>OISC</code> would be enough, but my aim is to strike a balance between simplicity and practicality.</p>
+<p><a href="https://github.com/mhoertnagl/mnml-vm">mnml</a> is a 16bit virtual stack machine with a whopping 64k of addressable memory. The instruction set is lavish and redundant but I will slim it down as soon as I gained some insights on the utility of each instruction. Of course <code>OISC</code> would be enough, but my aim is to strike a balance between simplicity and practicality.</p>
 <p>The following table lists the stack manipulation instructions:</p>
 <table>
 <thead>
@@ -200,32 +200,46 @@
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>equ</td>
+<td>x y ..</td>
+<td>(y == a) ..</td>
 <td>Push 1 on the stack iff the top two elements are equal.</td>
 </tr>
 <tr>
 <td>neq</td>
+<td>x y ..</td>
+<td>(y != a) ..</td>
 <td>Push 1 on the stack iff the top two elements are not equal.</td>
 </tr>
 <tr>
 <td>slt</td>
+<td>x y ..</td>
+<td>(y &#x3C; a) ..</td>
 <td>Push 1 on the stack iff the top if the second element is less than the first element.</td>
 </tr>
 <tr>
 <td>sgt</td>
+<td>x y ..</td>
+<td>(y > a) ..</td>
 <td>Push 1 on the stack iff the top if the second element is greater than the first element.</td>
 </tr>
 <tr>
 <td>sle</td>
+<td>x y ..</td>
+<td>(y &#x3C;= a) ..</td>
 <td>Push 1 on the stack iff the top if the second element is less than or equal to the first element.</td>
 </tr>
 <tr>
 <td>sge</td>
+<td>x y ..</td>
+<td>(y >= a) ..</td>
 <td>Push 1 on the stack iff the top if the second element is greater than or equal to the first element.</td>
 </tr>
 </tbody>
@@ -289,27 +303,61 @@
 </table>
 <p>Words are stored big-endian. At start-up the VM sets the program counter <code>PC = 0</code> and the stack pointer <code>SP</code> to the end of memory.</p>
 <h3>Devices</h3>
-<p>// Device concept</p>
-<p>Two operations to receive data from and transfer data to devices.</p>
+<p>mnml can handle up to 16 devices each with 16bit of registers at most. There are two operations to receive data from and transfer data to devices.</p>
 <table>
 <thead>
 <tr>
 <th>Instruction</th>
+<th>Stack before</th>
+<th>Stack after</th>
 <th>Effect</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>drx</td>
-<td>Read from device.</td>
+<td>a r ..</td>
+<td>DEV[a][r] ..</td>
+<td>Read register <code>r</code> from device <code>a</code>.</td>
 </tr>
 <tr>
 <td>dtx</td>
-<td>Write to device.</td>
+<td>a r v ..</td>
+<td></td>
+<td>Write value <code>v</code> to register <code>r</code> of device <code>a</code>.</td>
 </tr>
 </tbody>
 </table>
-<h2>Assembler</h2></article>
+<p>The only implemented device at this point is a display device. Some devices like the mouse or the network require provisions to interrupt the normal execution of the VM. These will be retrofitted to the design as soon as required.</p>
+<h2>Assembler</h2>
+<p>A stack machine simplifies the implementation of the assembler considerable. Each token of the source input can be processed independently and there are actually only four different types of tokens. These are</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Translation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>psh, pop, nip, dup, ovr, swp, rot, inc, dec, add, sub, mul, div, not, and, oor, xor, sll, srl, equ, neq, slt, sgt, sle, sge, jmp, jal, bra, ldw, stw, drx, dtx</td>
+<td>Reserved operational keywords will be translated to their byte code representation. All mnemonics are the same length, which enables simpler table lookup. E.g. traditional logic <code>or</code> is thus represented as <code>oor</code> a stand-in for 'ordinary or'.</td>
+</tr>
+<tr>
+<td>0x1234, 1234, ..</td>
+<td>Numbers are encoded in twos-complement. The assembler supports decimal and hexadecimal numbers.</td>
+</tr>
+<tr>
+<td>@label, ..</td>
+<td>Labels are not encoded at all. However in the first pass the assembler records the locations of the labels. In the second pass references to these labels wil be resolved.</td>
+</tr>
+<tr>
+<td>&#x26;label, ..</td>
+<td>References will be translated to the location of the corresponding label. References are tagged with <code>&#x26;</code> as opposed to <code>@</code> for labels to facilitate translation without the need of additional information of previous tokens.</td>
+</tr>
+</tbody>
+</table>
+<p>The source for the assembler is available <a href="https://github.com/mhoertnagl/mnml-as">here</a>.</p></article>
     </section>
   </main>
   <footer>

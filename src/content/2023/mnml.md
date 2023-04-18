@@ -7,13 +7,13 @@ tags:
   - c
   - vm
   - assembler
-draft: true
+draft: false
 ---
 There is something magical about computing. Implementing an educational computing system from scratch provides ample opportunity to dabble in design minimalism. mnml is a virtual stack machine plus an assembler stripped to the bones.
 
 ## The Virtual Machine
 
-mnml is a 16bit virtual stack machine with a whopping 64k of addressable memory. The instruction set is lavish and redundant but I will slim it down as soon as I gained some insights on the utility of each instruction. Of course `OISC` would be enough, but my aim is to strike a balance between simplicity and practicality.
+[mnml](https://github.com/mhoertnagl/mnml-vm) is a 16bit virtual stack machine with a whopping 64k of addressable memory. The instruction set is lavish and redundant but I will slim it down as soon as I gained some insights on the utility of each instruction. Of course `OISC` would be enough, but my aim is to strike a balance between simplicity and practicality.
 
 The following table lists the stack manipulation instructions:
 
@@ -55,16 +55,16 @@ Next, consider the logic operations:
 
 `sll` and `srl` can be emulated with `mul` and `div`. Arithmetic shift is missing completely but again can be emulated with `div`. 
 
-| Instruction | Effect                                                                                               |
-| ----------- | ---------------------------------------------------------------------------------------------------- |
-| equ         | Push 1 on the stack iff the top two elements are equal.                                              |
-| neq         | Push 1 on the stack iff the top two elements are not equal.                                          |
-| slt         | Push 1 on the stack iff the top if the second element is less than the first element.                |
-| sgt         | Push 1 on the stack iff the top if the second element is greater than the first element.             |
-| sle         | Push 1 on the stack iff the top if the second element is less than or equal to the first element.    |
-| sge         | Push 1 on the stack iff the top if the second element is greater than or equal to the first element. |
+| Instruction | Stack before | Stack after | Effect                                                                                               |
+| ----------- | ------------ | ----------- | ---------------------------------------------------------------------------------------------------- |
+| equ         | x y ..       | (y == a) .. | Push 1 on the stack iff the top two elements are equal.                                              |
+| neq         | x y ..       | (y != a) .. | Push 1 on the stack iff the top two elements are not equal.                                          |
+| slt         | x y ..       | (y < a) ..  | Push 1 on the stack iff the top if the second element is less than the first element.                |
+| sgt         | x y ..       | (y > a) ..  | Push 1 on the stack iff the top if the second element is greater than the first element.             |
+| sle         | x y ..       | (y <= a) .. | Push 1 on the stack iff the top if the second element is less than or equal to the first element.    |
+| sge         | x y ..       | (y >= a) .. | Push 1 on the stack iff the top if the second element is greater than or equal to the first element. |
 
-Some of these can be emulated with a swap and the dual comparison operation.
+Some of these can be emulated with a swap and the dual comparison operation. 
 
 | Instruction | Stack before | Stack after | Effect                                                                                       |
 | ----------- | ------------ | ----------- | -------------------------------------------------------------------------------------------- |
@@ -85,13 +85,24 @@ Words are stored big-endian. At start-up the VM sets the program counter `PC = 0
 
 ### Devices
 
-// Device concept
+mnml can handle up to 16 devices each with 16bit of registers at most. There are two operations to receive data from and transfer data to devices. 
 
-Two operations to receive data from and transfer data to devices. 
+| Instruction | Stack before | Stack after  | Effect                                         |
+| ----------- | ------------ | ------------ | ---------------------------------------------- |
+| drx         | a r ..       | DEV[a][r] .. | Read register `r` from device `a`.             |
+| dtx         | a r v ..     |              | Write value `v` to register `r` of device `a`. |
 
-| Instruction | Effect            |
-| ----------- | ----------------- |
-| drx         | Read from device. |
-| dtx         | Write to device.  |
+The only implemented device at this point is a display device. Some devices like the mouse or the network require provisions to interrupt the normal execution of the VM. These will be retrofitted to the design as soon as required.
 
 ## Assembler
+
+A stack machine simplifies the implementation of the assembler considerable. Each token of the source input can be processed independently and there are actually only four different types of tokens. These are
+
+| Token                                                                                                                                                          | Translation                                                                                                                                                                                                                                       |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| psh, pop, nip, dup, ovr, swp, rot, inc, dec, add, sub, mul, div, not, and, oor, xor, sll, srl, equ, neq, slt, sgt, sle, sge, jmp, jal, bra, ldw, stw, drx, dtx | Reserved operational keywords will be translated to their byte code representation. All mnemonics are the same length, which enables simpler table lookup. E.g. traditional logic `or` is thus represented as `oor` a stand-in for 'ordinary or'. |
+| 0x1234, 1234, ..                                                                                                                                               | Numbers are encoded in twos-complement. The assembler supports decimal and hexadecimal numbers.                                                                                                                                                   |
+| @label, ..                                                                                                                                                     | Labels are not encoded at all. However in the first pass the assembler records the locations of the labels. In the second pass references to these labels wil be resolved.                                                                        |
+| &label, ..                                                                                                                                                     | References will be translated to the location of the corresponding label. References are tagged with `&` as opposed to `@` for labels to facilitate translation without the need of additional information of previous tokens.                    |
+
+The source for the assembler is available [here](https://github.com/mhoertnagl/mnml-as).
